@@ -393,6 +393,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Fetch Reviews from Supabase
     async function fetchReviews() {
+        const { data: { user } } = await supabaseClient.auth.getUser();
         const { data, error } = await supabaseClient
             .from('reviews')
             .select('*')
@@ -403,27 +404,53 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
-        renderReviews(data);
+        renderReviews(data, user);
     }
 
-    function renderReviews(reviews) {
+    function renderReviews(reviews, currentUser) {
         if (!reviews || reviews.length === 0) {
             reviewList.innerHTML = '<p class="empty-msg">첫 번째 리뷰를 남겨보세요!</p>';
             return;
         }
 
-        reviewList.innerHTML = reviews.map(rev => `
-            <div class="review-item">
-                <div class="review-item-header">
-                    <div>
-                        <span class="review-author">${rev.author_email.split('@')[0]}***</span>
-                        <div class="review-stars">${'★'.repeat(rev.rating)}${'☆'.repeat(5 - rev.rating)}</div>
+        reviewList.innerHTML = reviews.map(rev => {
+            const isAuthor = currentUser && currentUser.email === rev.author_email;
+            return `
+                <div class="review-item">
+                    <div class="review-item-header">
+                        <div>
+                            <span class="review-author">${rev.author_email.split('@')[0]}***</span>
+                            <div class="review-stars">${'★'.repeat(rev.rating)}${'☆'.repeat(5 - rev.rating)}</div>
+                        </div>
+                        <div style="text-align: right;">
+                            <span class="review-date">${new Date(rev.created_at).toLocaleDateString()}</span>
+                            ${isAuthor ? `<br><button class="review-delete-btn" data-id="${rev.id}">삭제</button>` : ''}
+                        </div>
                     </div>
-                    <span class="review-date">${new Date(rev.created_at).toLocaleDateString()}</span>
+                    <div class="review-content">${rev.content}</div>
                 </div>
-                <div class="review-content">${rev.content}</div>
-            </div>
-        `).join('');
+            `;
+        }).join('');
+
+        // Add Delete Event Listeners
+        document.querySelectorAll('.review-delete-btn').forEach(btn => {
+            btn.addEventListener('click', async () => {
+                const reviewId = btn.getAttribute('data-id');
+                if (confirm('정말 삭제하시겠어요?')) {
+                    const { error } = await supabaseClient
+                        .from('reviews')
+                        .delete()
+                        .eq('id', reviewId);
+
+                    if (error) {
+                        alert('리뷰 삭제 실패: ' + error.message);
+                    } else {
+                        alert('리뷰가 삭제되었습니다.');
+                        fetchReviews();
+                    }
+                }
+            });
+        });
     }
 
     // Submit Review
