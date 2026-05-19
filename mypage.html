@@ -87,6 +87,30 @@
             border-radius: 4px;
             font-weight: bold;
         }
+
+        /* 반응형 가시성 조절 */
+        @media (max-width: 600px) {
+            .mypage-container {
+                margin: 5rem auto 2rem;
+                padding: 0 1rem;
+            }
+            .order-header {
+                flex-direction: column;
+                gap: 0.8rem;
+            }
+            .order-item {
+                flex-direction: column;
+                gap: 0.4rem;
+                margin-bottom: 1.2rem;
+            }
+            .order-status {
+                align-self: flex-start;
+            }
+            .order-footer {
+                text-align: left;
+                font-size: 1.05rem;
+            }
+        }
     </style>
 </head>
 <body>

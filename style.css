@@ -29,6 +29,19 @@
     --bg-hover: #4a3526;
 }
 
+html {
+    font-size: 16px;
+}
+@media (max-width: 1024px) {
+    html { font-size: 15px; }
+}
+@media (max-width: 768px) {
+    html { font-size: 14px; }
+}
+@media (max-width: 480px) {
+    html { font-size: 13px; }
+}
+
 * {
     box-sizing: border-box;
     margin: 0;
