@@ -416,7 +416,7 @@ document.addEventListener('DOMContentLoaded', () => {
         reviewList.innerHTML = reviews.map(rev => {
             const isAuthor = currentUser && currentUser.email === rev.author_email;
             return `
-                <div class="review-item">
+                <div class="review-item" id="review-${rev.id}">
                     <div class="review-item-header">
                         <div>
                             <span class="review-author">${rev.author_email.split('@')[0]}***</span>
@@ -424,13 +424,28 @@ document.addEventListener('DOMContentLoaded', () => {
                         </div>
                         <div style="text-align: right;">
                             <span class="review-date">${new Date(rev.created_at).toLocaleDateString()}</span>
-                            ${isAuthor ? `<br><button class="review-delete-btn" data-id="${rev.id}">삭제</button>` : ''}
+                            ${isAuthor ? `
+                                <br>
+                                <button class="review-edit-btn" data-id="${rev.id}" data-content="${rev.content}" data-rating="${rev.rating}">수정</button>
+                                <button class="review-delete-btn" data-id="${rev.id}">삭제</button>
+                            ` : ''}
                         </div>
                     </div>
                     <div class="review-content">${rev.content}</div>
                 </div>
             `;
         }).join('');
+
+        // Add Edit Event Listeners (Inline)
+        document.querySelectorAll('.review-edit-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const id = btn.getAttribute('data-id');
+                const content = btn.getAttribute('data-content');
+                const rating = parseInt(btn.getAttribute('data-rating'));
+                
+                showInlineEditForm(id, content, rating);
+            });
+        });
 
         // Add Delete Event Listeners
         document.querySelectorAll('.review-delete-btn').forEach(btn => {
@@ -453,6 +468,77 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    function showInlineEditForm(id, originalContent, originalRating) {
+        const reviewItem = document.getElementById(`review-${id}`);
+        const contentEl = reviewItem.querySelector('.review-content');
+        const headerEl = reviewItem.querySelector('.review-item-header');
+
+        // Hide original content and header buttons
+        contentEl.style.display = 'none';
+        headerEl.querySelector('.review-edit-btn').style.display = 'none';
+        headerEl.querySelector('.review-delete-btn').style.display = 'none';
+
+        // Create inline form
+        const editForm = document.createElement('div');
+        editForm.className = 'inline-edit-form';
+        editForm.innerHTML = `
+            <div class="inline-edit-stars">
+                ${[1, 2, 3, 4, 5].map(v => `<span class="star ${v <= originalRating ? 'active' : ''}" data-value="${v}">★</span>`).join('')}
+            </div>
+            <textarea class="inline-edit-textarea">${originalContent}</textarea>
+            <div class="inline-edit-buttons">
+                <button class="btn-inline-cancel">취소</button>
+                <button class="btn-inline-save">수정 완료</button>
+            </div>
+        `;
+
+        reviewItem.appendChild(editForm);
+
+        let currentRating = originalRating;
+        const inlineStars = editForm.querySelectorAll('.star');
+        
+        // Inline star click logic
+        inlineStars.forEach(star => {
+            star.addEventListener('click', () => {
+                currentRating = parseInt(star.getAttribute('data-value'));
+                inlineStars.forEach(s => {
+                    if (parseInt(s.getAttribute('data-value')) <= currentRating) {
+                        s.classList.add('active');
+                    } else {
+                        s.classList.remove('active');
+                    }
+                });
+            });
+        });
+
+        // Cancel button logic
+        editForm.querySelector('.btn-inline-cancel').addEventListener('click', () => {
+            editForm.remove();
+            contentEl.style.display = 'block';
+            headerEl.querySelector('.review-edit-btn').style.display = 'inline-block';
+            headerEl.querySelector('.review-delete-btn').style.display = 'inline-block';
+        });
+
+        // Save button logic
+        editForm.querySelector('.btn-inline-save').addEventListener('click', async () => {
+            const newContent = editForm.querySelector('.inline-edit-textarea').value;
+            
+            if (confirm('수정 하시겠어요?')) {
+                const { error } = await supabaseClient
+                    .from('reviews')
+                    .update({ content: newContent, rating: currentRating })
+                    .eq('id', id);
+
+                if (error) {
+                    alert('리뷰 수정 실패: ' + error.message);
+                } else {
+                    alert('리뷰가 수정되었습니다!');
+                    fetchReviews();
+                }
+            }
+        });
+    }
+
     // Submit Review
     reviewForm.addEventListener('submit', async (e) => {
         e.preventDefault();
@@ -466,6 +552,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const content = document.getElementById('reviewContent').value;
         const rating = parseInt(ratingValueInput.value);
 
+        // Insert new review
         const { error } = await supabaseClient
             .from('reviews')
             .insert([
