@@ -296,7 +296,7 @@ document.addEventListener('DOMContentLoaded', () => {
         `).join('');
     }
 
-    inquiryForm.addEventListener('submit', (e) => {
+    inquiryForm.addEventListener('submit', async (e) => {
         e.preventDefault();
 
         const name = document.getElementById('userName').value;
@@ -304,15 +304,30 @@ document.addEventListener('DOMContentLoaded', () => {
         const content = document.getElementById('inquiryContent').value;
         const date = new Date().toLocaleDateString('ko-KR');
 
-        const newInquiry = { name, contact, content, date };
-        const inquiries = JSON.parse(localStorage.getItem('inquiries')) || [];
-        
-        inquiries.unshift(newInquiry); // Add to the beginning
-        localStorage.setItem('inquiries', JSON.stringify(inquiries));
+        try {
+            // Save to Supabase contact table
+            const { data, error } = await supabaseClient
+                .from('contact')
+                .insert([
+                    { name: name, content: content }
+                ]);
 
-        renderInquiries(inquiries);
-        inquiryForm.reset();
-        alert('문의가 성공적으로 제출되었습니다.');
+            if (error) throw error;
+
+            alert('문의가 접수되었습니다!');
+
+            // Update UI list (using local storage as fallback/mock for list display)
+            const newInquiry = { name, contact, content, date };
+            const inquiries = JSON.parse(localStorage.getItem('inquiries')) || [];
+            inquiries.unshift(newInquiry);
+            localStorage.setItem('inquiries', JSON.stringify(inquiries));
+            renderInquiries(inquiries);
+
+            inquiryForm.reset();
+        } catch (error) {
+            console.error('Error submitting inquiry:', error);
+            alert('문의 제출 중 오류가 발생했습니다. 다시 시도해주세요.');
+        }
     });
 
     // Initial load
