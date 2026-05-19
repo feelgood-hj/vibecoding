@@ -139,6 +139,35 @@
             </div>
         </section>
 
+        <!-- Review Section -->
+        <section class="reviews-section reveal" id="reviews">
+            <h2>커피 이야기 & 리뷰</h2>
+            <div class="review-container">
+                <!-- Review Form (Hidden for non-logged-in users) -->
+                <div id="reviewFormContainer" class="review-form-box">
+                    <p class="auth-needed-msg">로그인 후 리뷰를 작성할 수 있습니다.</p>
+                    <form id="reviewForm" class="review-form" style="display: none;">
+                        <div class="star-rating">
+                            <span class="star" data-value="1">★</span>
+                            <span class="star" data-value="2">★</span>
+                            <span class="star" data-value="3">★</span>
+                            <span class="star" data-value="4">★</span>
+                            <span class="star" data-value="5">★</span>
+                            <input type="hidden" id="ratingValue" value="5">
+                        </div>
+                        <textarea id="reviewContent" placeholder="원두의 맛과 향은 어떠셨나요? 소중한 리뷰를 남겨주세요." required></textarea>
+                        <button type="submit" class="btn-primary">리뷰 등록하기</button>
+                    </form>
+                </div>
+
+                <!-- Review List -->
+                <div id="reviewList" class="review-list">
+                    <!-- Reviews will be loaded here -->
+                    <p class="empty-msg">첫 번째 리뷰를 남겨보세요!</p>
+                </div>
+            </div>
+        </section>
+
         <!-- Location Section -->
         <section class="location reveal" id="location">
             <h2>오시는 길</h2>

@@ -222,7 +222,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Auth State Change Listener
     supabaseClient.auth.onAuthStateChange((event, session) => {
-        updateAuthUI(session?.user ?? null);
+        const user = session?.user ?? null;
+        updateAuthUI(user);
+        toggleReviewForm(user);
     });
 
     // Modal Tab Switching
@@ -253,6 +255,7 @@ document.addEventListener('DOMContentLoaded', () => {
     async function checkInitialAuth() {
         const { data: { user } } = await supabaseClient.auth.getUser();
         updateAuthUI(user);
+        toggleReviewForm(user);
     }
     checkInitialAuth();
 
@@ -356,6 +359,120 @@ document.addEventListener('DOMContentLoaded', () => {
     revealElements.forEach(el => {
         revealObserver.observe(el);
     });
+
+    // ------------------------------------
+    // Review Logic
+    // ------------------------------------
+    const reviewForm = document.getElementById('reviewForm');
+    const reviewList = document.getElementById('reviewList');
+    const reviewFormContainer = document.getElementById('reviewFormContainer');
+    const stars = document.querySelectorAll('.star');
+    const ratingValueInput = document.getElementById('ratingValue');
+
+    // Star Rating Click Event
+    stars.forEach(star => {
+        star.addEventListener('click', () => {
+            const val = star.getAttribute('data-value');
+            ratingValueInput.value = val;
+            updateStarUI(val);
+        });
+    });
+
+    function updateStarUI(val) {
+        stars.forEach(s => {
+            if (s.getAttribute('data-value') <= val) {
+                s.classList.add('active');
+            } else {
+                s.classList.remove('active');
+            }
+        });
+    }
+
+    // Initialize stars to 5
+    updateStarUI(5);
+
+    // Fetch Reviews from Supabase
+    async function fetchReviews() {
+        const { data, error } = await supabaseClient
+            .from('reviews')
+            .select('*')
+            .order('created_at', { ascending: false });
+
+        if (error) {
+            console.error('Error fetching reviews:', error);
+            return;
+        }
+
+        renderReviews(data);
+    }
+
+    function renderReviews(reviews) {
+        if (!reviews || reviews.length === 0) {
+            reviewList.innerHTML = '<p class="empty-msg">첫 번째 리뷰를 남겨보세요!</p>';
+            return;
+        }
+
+        reviewList.innerHTML = reviews.map(rev => `
+            <div class="review-item">
+                <div class="review-item-header">
+                    <div>
+                        <span class="review-author">${rev.author_email.split('@')[0]}***</span>
+                        <div class="review-stars">${'★'.repeat(rev.rating)}${'☆'.repeat(5 - rev.rating)}</div>
+                    </div>
+                    <span class="review-date">${new Date(rev.created_at).toLocaleDateString()}</span>
+                </div>
+                <div class="review-content">${rev.content}</div>
+            </div>
+        `).join('');
+    }
+
+    // Submit Review
+    reviewForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        
+        const { data: { user } } = await supabaseClient.auth.getUser();
+        if (!user) {
+            alert('로그인이 필요한 기능입니다.');
+            return;
+        }
+
+        const content = document.getElementById('reviewContent').value;
+        const rating = parseInt(ratingValueInput.value);
+
+        const { error } = await supabaseClient
+            .from('reviews')
+            .insert([
+                { 
+                    content, 
+                    author_email: user.email, 
+                    rating 
+                }
+            ]);
+
+        if (error) {
+            alert('리뷰 등록 실패: ' + error.message);
+        } else {
+            alert('리뷰가 등록되었습니다!');
+            reviewForm.reset();
+            updateStarUI(5);
+            fetchReviews();
+        }
+    });
+
+    // Toggle Review Form Visibility based on Auth
+    function toggleReviewForm(user) {
+        const authMsg = reviewFormContainer.querySelector('.auth-needed-msg');
+        if (user) {
+            authMsg.style.display = 'none';
+            reviewForm.style.display = 'block';
+        } else {
+            authMsg.style.display = 'block';
+            reviewForm.style.display = 'none';
+        }
+    }
+
+    // Initial load
+    fetchReviews();
 
     // ------------------------------------
     // Inquiry Form Logic
