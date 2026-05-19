@@ -1,3 +1,8 @@
+// Supabase configuration
+const SUPABASE_URL = 'https://tsbbfkmmsakhernjfprm.supabase.co';
+const SUPABASE_KEY = 'sb_publishable_c3kjyrfdpKy-o8XyXXvSBQ_2UfRtZ_t';
+const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
 document.addEventListener('DOMContentLoaded', () => {
     // ------------------------------------
     // Hero Slider Logic
