@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>주례 브루어스 | 빈티지 로스팅 카페</title>
+    <meta name="description" content="부산 주례동 빈티지 감성 로스팅 카페 주례 브루어스입니다. 싱글오리진 원두와 드립백을 집에서 만나보세요.">
+    <!-- Noto Serif KR font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="visitor-stats" id="visitorStats">
+        방문 고객 <span id="visitorCount">0</span>명
+    </div>
+    <header class="navbar">
+        <div class="logo">주례 브루어스</div>
+        <nav class="nav-links">
+            <a href="#space">공간</a>
+            <a href="#shop">원두 스토어</a>
+            <a href="#location">오시는 길</a>
+        </nav>
+        <div class="nav-utils">
+            <button class="icon-btn" id="cartBtn">🛒 (<span id="cartCount">0</span>)</button>
+            <button class="icon-btn" id="loginBtn">로그인</button>
+            <button class="icon-btn" id="themeToggle" aria-label="Toggle Dark Mode">🌙</button>
+        </div>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="hero" id="hero">
+            <div class="hero-slider" id="heroSlider">
+                <div class="hero-slide active" style="background-image: linear-gradient(rgba(43, 31, 20, 0.65), rgba(43, 31, 20, 0.65)), url('https://images.unsplash.com/photo-1497935586351-b67a49e012bf?auto=format&fit=crop&w=1400&q=80');"></div>
+                <div class="hero-slide" style="background-image: linear-gradient(rgba(43, 31, 20, 0.65), rgba(43, 31, 20, 0.65)), url('https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=1400&q=80');"></div>
+                <div class="hero-slide" style="background-image: linear-gradient(rgba(43, 31, 20, 0.65), rgba(43, 31, 20, 0.65)), url('https://images.unsplash.com/photo-1507133750040-4a8f57021571?auto=format&fit=crop&w=1400&q=80');"></div>
+            </div>
+            <div class="hero-content">
+                <h1>주례 브루어스</h1>
+                <p>주례동에 숨겨진 보석 같은 빈티지 로스터리 카페</p>
+                <a href="#shop" class="btn-primary">시그니처 원두 구경하기</a>
+            </div>
+        </section>
+
+        <!-- Features Section -->
+        <section class="features reveal" id="features">
+            <div class="feature-item">
+                <div class="feature-icon">☕</div>
+                <h3>직접 로스팅</h3>
+                <p>매일 아침, 원두의 개성을 살려 최적의 포인트로 로스팅합니다.</p>
+            </div>
+            <div class="feature-item">
+                <div class="feature-icon">🏛️</div>
+                <h3>빈티지 공간</h3>
+                <p>세월의 멋을 담은 앤틱한 가구와 소품들이 주는 아늑함을 느껴보세요.</p>
+            </div>
+            <div class="feature-item">
+                <div class="feature-icon">🚚</div>
+                <h3>빠른 배송</h3>
+                <p>오후 2시 이전 주문 시 당일 로스팅된 원두를 바로 발송합니다.</p>
+            </div>
+        </section>
+
+        <!-- Space Section -->
+        <section class="space reveal" id="space">
+            <h2>빈티지 무드를 담은 공간</h2>
+            <div class="slider-wrapper">
+                <div class="slider" id="spaceSlider">
+                    <div class="slide active">
+                        <img src="https://images.unsplash.com/photo-1554118811-1e0d58224f24?auto=format&fit=crop&w=1200&q=80" alt="Cafe Interior 1">
+                        <div class="slide-caption">세월의 흔적이 묻어나는 원목 가구와 따뜻한 조명</div>
+                    </div>
+                    <div class="slide">
+                        <img src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=1200&q=80" alt="Cafe Interior 2">
+                        <div class="slide-caption">직접 선별한 앤틱 소품들로 채워진 감성적인 코너</div>
+                    </div>
+                    <div class="slide">
+                        <img src="https://images.unsplash.com/photo-1507133750040-4a8f57021571?auto=format&fit=crop&w=1200&q=80" alt="Cafe Interior 3">
+                        <div class="slide-caption">매일 아침 직접 로스팅하는 신선한 원두의 향기</div>
+                    </div>
+                </div>
+                <button class="slider-btn prev" id="prevSlide">&#10094;</button>
+                <button class="slider-btn next" id="nextSlide">&#10095;</button>
+            </div>
+        </section>
+
+        <!-- Commerce Section -->
+        <section class="shop reveal" id="shop">
+            <h2>시그니처 로스팅 & 드립백</h2>
+            <p style="text-align: center; margin-bottom: 2rem; color: #666;">주례 브루어스가 직접 로스팅한 원두를 온라인 간편결제로 만나보세요.</p>
+            <div class="product-grid">
+                <!-- Product 1 -->
+                <div class="product-card">
+                    <div class="product-img img-ethiopia"></div>
+                    <div class="product-info">
+                        <h3>에티오피아 예가체프 G1</h3>
+                        <p class="desc">꽃향기와 상큼한 베리류의 단맛, 기분 좋은 산미</p>
+                        <p class="price">15,000원 <span class="weight">(200g)</span></p>
+                        <select class="option-select">
+                            <option value="200">200g (기본)</option>
+                            <option value="500">500g (+12,000원)</option>
+                        </select>
+                        <button class="btn-secondary add-to-cart" data-id="p1" data-name="에티오피아 예가체프 G1" data-price="15000">장바구니 담기</button>
+                    </div>
+                </div>
+                <!-- Product 2 -->
+                <div class="product-card">
+                    <div class="product-img img-guatemala"></div>
+                    <div class="product-info">
+                        <h3>과테말라 안티구아 SHB</h3>
+                        <p class="desc">스모키한 향과 다크초콜릿의 부드러운 바디감</p>
+                        <p class="price">14,000원 <span class="weight">(200g)</span></p>
+                        <select class="option-select">
+                            <option value="200">200g (기본)</option>
+                            <option value="500">500g (+11,000원)</option>
+                        </select>
+                        <button class="btn-secondary add-to-cart" data-id="p2" data-name="과테말라 안티구아 SHB" data-price="14000">장바구니 담기</button>
+                    </div>
+                </div>
+                <!-- Product 3 -->
+                <div class="product-card">
+                    <div class="product-img img-dripbag"></div>
+                    <div class="product-info">
+                        <h3>시그니처 블렌드 드립백 세트</h3>
+                        <p class="desc">언제 어디서나 간편하게 즐기는 주례 브루어스의 맛 (10개입)</p>
+                        <p class="price">18,000원 <span class="weight"></span></p>
+                        <select class="option-select">
+                            <option value="1">1상자 (10개입)</option>
+                            <option value="2">2상자 (+18,000원)</option>
+                        </select>
+                        <button class="btn-secondary add-to-cart" data-id="p3" data-name="드립백 세트" data-price="18000">장바구니 담기</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Location Section -->
+        <section class="location reveal" id="location">
+            <h2>오시는 길</h2>
+            <div class="map-container">
+                <!-- Kakao Map - 지도퍼가기 시작 -->
+                <div id="daumRoughmapContainer1779074319274" class="root_daum_roughmap root_daum_roughmap_landing" style="margin: 0 auto;"></div>
+                
+                <script charset="UTF-8" class="daum_roughmap_loader_script" src="https://ssl.daumcdn.net/dmaps/map_js_init/roughmapLoader.js"></script>
+                
+                <script charset="UTF-8">
+                    new daum.roughmap.Lander({
+                        "timestamp" : "1779074319274",
+                        "key" : "2peuszy3o7qf",
+                        "mapWidth" : "640",
+                        "mapHeight" : "360"
+                    }).render();
+                </script>
+                <!-- Kakao Map - 지도퍼가기 끝 -->
+            </div>
+            <div class="map-info">
+                <p>📍 부산광역시 사상구 주례로 123, 주례 브루어스 1층</p>
+                <p>⏰ 10:00 - 22:00 (월요일 휴무)</p>
+                <p>🚗 주차: 매장 앞 3대 가능</p>
+                <button class="btn-primary route-btn" id="routeBtn">길찾기 앱 연동 (Mock)</button>
+            </div>
+        </section>
+
+        <!-- Inquiry Form Section -->
+        <section class="inquiry-section reveal" id="inquiry">
+            <h2>문의하기</h2>
+            <div class="inquiry-container">
+                <form id="inquiryForm" class="inquiry-form">
+                    <div class="form-group">
+                        <label for="userName">이름</label>
+                        <input type="text" id="userName" name="userName" placeholder="이름을 입력해주세요" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="userContact">연락처</label>
+                        <input type="tel" id="userContact" name="userContact" placeholder="연락처를 입력해주세요" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="inquiryContent">문의 내용</label>
+                        <textarea id="inquiryContent" name="inquiryContent" rows="5" placeholder="문의 내용을 입력해주세요" required></textarea>
+                    </div>
+                    <button type="submit" class="btn-primary submit-btn">문의 제출하기</button>
+                </form>
+
+                <div class="inquiry-list-container">
+                    <h3>문의 목록</h3>
+                    <div id="inquiryList" class="inquiry-list">
+                        <!-- 문의 목록이 여기에 표시됩니다 -->
+                        <p class="empty-msg">등록된 문의가 없습니다.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <p>상호명: 주례 브루어스 | 대표자: 김호준</p>
+        <p>사업자등록번호: 123-45-67890</p>
+        <p>이용약관 | <a href="#">개인정보처리방침</a></p>
+        <p>© 2026 Jurye Brewers. All rights reserved.</p>
+    </footer>
+
+    <!-- Cart Drawer -->
+    <div class="cart-drawer" id="cartDrawer">
+        <div class="cart-header">
+            <h3>장바구니</h3>
+            <button class="close-btn" id="closeCart">&times;</button>
+        </div>
+        <div class="cart-items" id="cartItemsList">
+            <!-- Items will be injected here -->
+            <p class="empty-msg">장바구니가 비어 있습니다.</p>
+        </div>
+        <div class="cart-footer">
+            <div class="total-price">총 결제 금액: <span id="totalPrice">0</span>원</div>
+            <button class="btn-primary checkout-btn" id="checkoutBtn">결제하기 (PG 연동)</button>
+        </div>
+    </div>
+
+    <!-- Login Modal Mock -->
+    <div class="modal-overlay" id="loginModal">
+        <div class="modal">
+            <button class="close-btn" id="closeLogin">&times;</button>
+            <h2>3초 간편 소셜 로그인</h2>
+            <p style="margin-bottom: 2rem; color: #555; font-size: 0.9rem;">복잡한 가입 없이 바로 주문하세요!</p>
+            <button class="social-btn kakao">카카오로 1초만에 시작하기</button>
+            <button class="social-btn naver">네이버로 시작하기</button>
+            <button class="social-btn google">Google 로그인</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
