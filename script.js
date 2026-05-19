@@ -309,7 +309,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const { data, error } = await supabaseClient
                 .from('contact')
                 .insert([
-                    { name: name, content: content }
+                    { name: name, contact: contact, content: content }
                 ]);
 
             if (error) throw error;
