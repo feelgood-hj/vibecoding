@@ -11,6 +11,30 @@
     <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "CafeOrCoffeeShop",
+      "name": "주례 브루어스",
+      "image": "https://images.unsplash.com/photo-1497935586351-b67a49e012bf?auto=format&fit=crop&w=1400&q=80",
+      "@id": "https://vibecoding-chi-seven.vercel.app",
+      "url": "https://vibecoding-chi-seven.vercel.app",
+      "telephone": "",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "주례로 123",
+        "addressLocality": "부산광역시",
+        "addressRegion": "사상구",
+        "addressCountry": "KR"
+      },
+      "openingHoursSpecification": {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": ["Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+        "opens": "10:00",
+        "closes": "22:00"
+      }
+    }
+    </script>
 </head>
 <body>
     <div class="visitor-stats" id="visitorStats">
@@ -73,20 +97,20 @@
             <div class="slider-wrapper">
                 <div class="slider" id="spaceSlider">
                     <div class="slide active">
-                        <img src="https://images.unsplash.com/photo-1554118811-1e0d58224f24?auto=format&fit=crop&w=1200&q=80" alt="Cafe Interior 1">
+                        <img src="https://images.unsplash.com/photo-1554118811-1e0d58224f24?auto=format&fit=crop&w=1200&q=80" alt="Cafe Interior 1" loading="lazy" decoding="async">
                         <div class="slide-caption">세월의 흔적이 묻어나는 원목 가구와 따뜻한 조명</div>
                     </div>
                     <div class="slide">
-                        <img src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=1200&q=80" alt="Cafe Interior 2">
+                        <img src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=1200&q=80" alt="Cafe Interior 2" loading="lazy" decoding="async">
                         <div class="slide-caption">직접 선별한 앤틱 소품들로 채워진 감성적인 코너</div>
                     </div>
                     <div class="slide">
-                        <img src="https://images.unsplash.com/photo-1507133750040-4a8f57021571?auto=format&fit=crop&w=1200&q=80" alt="Cafe Interior 3">
+                        <img src="https://images.unsplash.com/photo-1507133750040-4a8f57021571?auto=format&fit=crop&w=1200&q=80" alt="Cafe Interior 3" loading="lazy" decoding="async">
                         <div class="slide-caption">매일 아침 직접 로스팅하는 신선한 원두의 향기</div>
                     </div>
                 </div>
-                <button class="slider-btn prev" id="prevSlide">&#10094;</button>
-                <button class="slider-btn next" id="nextSlide">&#10095;</button>
+                <button class="slider-btn prev" id="prevSlide" aria-label="이전 슬라이드">&#10094;</button>
+                <button class="slider-btn next" id="nextSlide" aria-label="다음 슬라이드">&#10095;</button>
             </div>
         </section>
 
@@ -606,11 +630,11 @@
     <footer class="footer">
         <div class="footer-sns">
             <a href="https://www.instagram.com/jjun_kh/" target="_blank" rel="noopener noreferrer" class="sns-icon" aria-label="Instagram">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" alt="Instagram Logo">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" alt="Instagram Logo" loading="lazy" decoding="async">
             </a>
             <a href="https://blog.naver.com/shiho9135" target="_blank" rel="noopener noreferrer" class="sns-icon" aria-label="Naver Blog">
-                <img src="naver_blog_light.png" alt="Naver Blog Logo" class="logo-light">
-                <img src="naver_blog_dark.png" alt="Naver Blog Logo" class="logo-dark">
+                <img src="naver_blog_light.png" alt="Naver Blog Logo" class="logo-light" loading="lazy" decoding="async">
+                <img src="naver_blog_dark.png" alt="Naver Blog Logo" class="logo-dark" loading="lazy" decoding="async">
             </a>
         </div>
         <p>상호명: 주례 브루어스 | 대표자: 김호준</p>
@@ -623,7 +647,7 @@
     <div class="cart-drawer" id="cartDrawer">
         <div class="cart-header">
             <h3>장바구니</h3>
-            <button class="close-btn" id="closeCart">&times;</button>
+            <button class="close-btn" id="closeCart" aria-label="장바구니 닫기">&times;</button>
         </div>
         <div class="cart-items" id="cartItemsList">
             <!-- Items will be injected here -->
@@ -638,11 +662,11 @@
     <!-- Login/Register Modal -->
     <div class="modal-overlay" id="loginModal">
         <div class="modal auth-modal">
-            <button class="close-btn" id="closeLogin">&times;</button>
+            <button class="close-btn" id="closeLogin" aria-label="로그인 창 닫기">&times;</button>
             
-            <div class="auth-tabs">
-                <button class="auth-tab active" data-tab="login">로그인</button>
-                <button class="auth-tab" data-tab="register">회원가입</button>
+            <div class="auth-tabs" role="tablist">
+                <button class="auth-tab active" data-tab="login" role="tab" aria-selected="true">로그인</button>
+                <button class="auth-tab" data-tab="register" role="tab" aria-selected="false">회원가입</button>
             </div>
 
             <!-- Login Tab Content -->
