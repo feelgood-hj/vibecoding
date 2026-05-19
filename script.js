@@ -51,7 +51,21 @@ document.addEventListener('DOMContentLoaded', () => {
     // ------------------------------------
     // Cart Logic
     // ------------------------------------
-    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+    let cart = [];
+    try {
+        const saved = localStorage.getItem('cart');
+        if (saved) cart = JSON.parse(saved);
+        if (!Array.isArray(cart)) cart = [];
+    } catch (e) {
+        console.error('Cart parse error:', e);
+    }
+    
+    // Ensure legacy items have quantity
+    cart = cart.map(item => {
+        if (!item.quantity) item.quantity = 1;
+        return item;
+    });
+
     const cartDrawer = document.getElementById('cartDrawer');
     const cartItemsList = document.getElementById('cartItemsList');
     const cartCountEl = document.getElementById('cartCount');
@@ -68,17 +82,19 @@ document.addEventListener('DOMContentLoaded', () => {
             cartItemsList.innerHTML = '<p class="empty-msg">장바구니가 비어 있습니다.</p>';
         } else {
             cart.forEach((item, index) => {
+                const qty = item.quantity || 1;
+                const price = item.price || 0;
                 const itemEl = document.createElement('div');
                 itemEl.className = 'cart-item';
                 itemEl.innerHTML = `
                     <div class="cart-item-info">
                         <h4>${item.name}</h4>
-                        <p>${item.price.toLocaleString()}원 (${item.option}g) &times; ${item.quantity}개</p>
+                        <p>${price.toLocaleString()}원 (${item.option}g) &times; ${qty}개</p>
                     </div>
                     <button class="remove-item" data-index="${index}">삭제</button>
                 `;
                 cartItemsList.appendChild(itemEl);
-                total += item.price * item.quantity;
+                total += price * qty;
             });
         }
 
@@ -124,9 +140,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 finalPrice += 18000;
             }
 
-            const existingItem = cart.find(item => item.id === id && item.option === optionValue);
+            const existingItem = cart.find(item => item && item.id === id && item.option === optionValue);
             if (existingItem) {
-                existingItem.quantity += quantity;
+                existingItem.quantity = (existingItem.quantity || 1) + quantity;
             } else {
                 cart.push({
                     id,
