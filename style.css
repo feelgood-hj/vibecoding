@@ -9,6 +9,9 @@
     --modal-bg: rgba(0,0,0,0.6);
     --card-bg: #ffffff;
     --transition-speed: 0.3s;
+    --text-muted: #666666;
+    --bg-muted: #fafafa;
+    --bg-hover: #f5f5f5;
 }
 
 [data-theme="dark"] {
@@ -21,6 +24,9 @@
     --white: #2b1f14;
     --card-bg: #2b1f14;
     --modal-bg: rgba(0,0,0,0.8);
+    --text-muted: #a89f91;
+    --bg-muted: #3c2a1e;
+    --bg-hover: #4a3526;
 }
 
 * {
@@ -273,7 +279,7 @@ h2 {
 
 .feature-item p {
     font-size: 0.95rem;
-    color: #666;
+    color: var(--text-muted);
 }
 
 /* Location */
@@ -394,7 +400,7 @@ h2 {
 
 .product-info .desc {
     font-size: 0.95rem;
-    color: #666;
+    color: var(--text-muted);
     margin-bottom: 1.5rem;
     flex-grow: 1;
 }
@@ -409,7 +415,7 @@ h2 {
 .weight {
     font-size: 0.9rem;
     font-weight: 400;
-    color: #888;
+    color: var(--text-muted);
 }
 
 .option-select {
@@ -419,7 +425,7 @@ h2 {
     border: 1px solid var(--border-color);
     font-family: inherit;
     border-radius: 4px;
-    background-color: #fafafa;
+    background-color: var(--bg-muted);
     color: var(--text-color);
 }
 
@@ -561,7 +567,7 @@ h2 {
 
 .empty-msg {
     text-align: center;
-    color: #888;
+    color: var(--text-muted);
     margin-top: 3rem;
 }
 
@@ -581,7 +587,7 @@ h2 {
 
 .cart-item-info p {
     font-size: 0.85rem;
-    color: #666;
+    color: var(--text-muted);
 }
 
 .remove-item {
@@ -660,7 +666,7 @@ h2 {
     font-family: inherit;
     font-weight: 700;
     font-size: 1.1rem;
-    color: #888;
+    color: var(--text-muted);
     cursor: pointer;
     position: relative;
     transition: color 0.3s;
@@ -690,7 +696,7 @@ h2 {
 }
 
 .auth-desc {
-    color: #666;
+    color: var(--text-muted);
     font-size: 0.95rem;
     margin-bottom: 1.5rem;
 }
@@ -708,7 +714,7 @@ h2 {
     display: flex;
     align-items: center;
     margin: 1.5rem 0;
-    color: #aaa;
+    color: var(--text-muted);
     font-size: 0.85rem;
 }
 
@@ -744,7 +750,7 @@ h2 {
 }
 
 .logout-btn:hover {
-    background: #f5f5f5;
+    background: var(--bg-hover);
 }
 
 /* Review Section Styles */
@@ -763,7 +769,7 @@ h2 {
 }
 
 .auth-needed-msg {
-    color: #888;
+    color: var(--text-muted);
     font-style: italic;
 }
 
@@ -788,7 +794,7 @@ h2 {
     border: 1px solid var(--border-color);
     border-radius: 8px;
     font-family: inherit;
-    background: #fafafa;
+    background: var(--bg-muted);
     margin-bottom: 1.5rem;
     resize: none;
 }
@@ -825,7 +831,7 @@ h2 {
 }
 
 .review-date {
-    color: #999;
+    color: var(--text-muted);
     font-size: 0.8rem;
 }
 
@@ -883,7 +889,7 @@ h2 {
 .avg-label {
     display: block;
     font-size: 0.9rem;
-    color: #888;
+    color: var(--text-muted);
     margin-bottom: 0.3rem;
 }
 
@@ -896,7 +902,7 @@ h2 {
 
 .total-reviews {
     font-size: 0.9rem;
-    color: #666;
+    color: var(--text-muted);
 }
 
 .review-sort-options {
@@ -911,7 +917,7 @@ h2 {
     border-radius: 20px;
     font-size: 0.85rem;
     cursor: pointer;
-    color: #888;
+    color: var(--text-muted);
     transition: all 0.2s;
 }
 
@@ -960,7 +966,7 @@ h2 {
 }
 
 .page-btn:hover:not(.active) {
-    background-color: #f5f5f5;
+    background-color: var(--bg-hover);
 }
 
 /* Inline Edit Styles */
@@ -1013,7 +1019,7 @@ h2 {
 
 .btn-inline-cancel {
     background-color: #eee;
-    color: #666;
+    color: var(--text-muted);
     border: none;
     padding: 0.5rem 1rem;
     border-radius: 4px;
@@ -1160,7 +1166,7 @@ h2 {
     border: 1px solid var(--border-color);
     border-radius: 6px;
     font-family: inherit;
-    background-color: #fafafa;
+    background-color: var(--bg-muted);
     color: var(--text-color);
     transition: border-color 0.3s, box-shadow 0.3s;
 }
