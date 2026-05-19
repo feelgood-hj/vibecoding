@@ -305,14 +305,27 @@ document.addEventListener('DOMContentLoaded', () => {
         const date = new Date().toLocaleDateString('ko-KR');
 
         try {
+            console.log('Attempting to insert:', { name, contact, content });
             // Save to Supabase contact table
             const { data, error } = await supabaseClient
                 .from('contact')
                 .insert([
-                    { name: name, contact: contact, content: content }
+                    { 
+                        name: name, 
+                        phone: contact, // Column name changed from 'contact' to 'phone'
+                        content: content
+                    }
                 ]);
 
-            if (error) throw error;
+            if (error) {
+                console.error('Supabase Error Details:', {
+                    message: error.message,
+                    details: error.details,
+                    hint: error.hint,
+                    code: error.code
+                });
+                throw error;
+            }
 
             alert('문의가 접수되었습니다!');
 
