@@ -51,7 +51,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // ------------------------------------
     // Cart Logic
     // ------------------------------------
-    let cart = [];
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
     const cartDrawer = document.getElementById('cartDrawer');
     const cartItemsList = document.getElementById('cartItemsList');
     const cartCountEl = document.getElementById('cartCount');
@@ -84,6 +84,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
         cartCountEl.textContent = cart.length;
         totalPriceEl.textContent = total.toLocaleString();
+
+        // Save cart to localStorage
+        localStorage.setItem('cart', JSON.stringify(cart));
 
         // Add event listeners to remove buttons
         document.querySelectorAll('.remove-item').forEach(btn => {
@@ -146,6 +149,9 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         alert('결제 페이지로 이동합니다. (토스페이먼츠/카카오페이 연동 예정)');
     });
+
+    // Initialize Cart UI on page load
+    updateCartUI();
 
     // ------------------------------------
     // Auth Logic (Supabase Auth)
