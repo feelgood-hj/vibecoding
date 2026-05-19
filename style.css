@@ -334,6 +334,33 @@ h2 {
     box-shadow: 0 15px 30px rgba(92, 60, 33, 0.15);
 }
 
+.product-img-wrapper {
+    position: relative;
+    overflow: hidden;
+}
+
+.img-logo-overlay {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: rgba(255, 255, 255, 0.85);
+    color: #5c3c21;
+    padding: 0.4rem 0.8rem;
+    font-size: 0.75rem;
+    font-weight: 700;
+    border-radius: 4px;
+    border: 1px solid #5c3c21;
+    pointer-events: none;
+    z-index: 2;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+[data-theme="dark"] .img-logo-overlay {
+    background: rgba(43, 31, 20, 0.85);
+    color: #f6efe8;
+    border-color: #f6efe8;
+}
+
 .product-img {
     height: 320px;
     background-size: cover;
@@ -341,8 +368,15 @@ h2 {
     background-repeat: no-repeat;
 }
 
-.img-ethiopia { background-image: url('ethiopia.jpg'); }
-.img-guatemala { background-image: url('guatemala.jpg'); }
+.img-ethiopia { background-image: url('img-ethiopia.png'); } /* Coffee Flower/Beans */
+.img-guatemala { background-image: url('img-guatemala.png'); } /* Dark Roast/Chocolate */
+.img-signature { background-image: url('img-signature.png'); } /* Balanced Blend */
+.img-tanzania { background-image: url('img-tanzania.png'); } /* Bright/Zesty */
+.img-kenya { background-image: url('img-kenya.png'); } /* Intense/Berry */
+.img-kenya-pb { background-image: url('https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?auto=format&fit=crop&w=800&q=80'); } /* Small/Specialty Beans */
+.img-colombia { background-image: url('https://images.unsplash.com/photo-1524350303359-24b1e600c01b?auto=format&fit=crop&w=800&q=80'); } /* Mild/Nutty */
+.img-honduras { background-image: url('https://images.unsplash.com/photo-1506372023823-741c83b836fe?auto=format&fit=crop&w=800&q=80'); } /* Sweet/Smooth */
+.img-harrar { background-image: url('https://images.unsplash.com/photo-1580915411954-282cb1b0d780?auto=format&fit=crop&w=800&q=80'); } /* Winey/Berry */
 .img-dripbag { background-image: url('dripbag.jpg'); }
 
 .product-info {
@@ -1045,6 +1079,20 @@ h2 {
     .route-btn { width: 100%; padding: 0.7rem; font-size: 1rem; }
     
     .footer { padding: 1.5rem 1rem; font-size: 0.8rem; }
+
+    .bean-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+    .bean-card {
+        padding: 1rem;
+    }
+    .stat-row > span:first-child {
+        width: 50px;
+    }
+    .stat-bar, .roast-dots {
+        margin: 0 0.5rem;
+    }
 }
 
 @media (max-width: 480px) {
@@ -1223,6 +1271,138 @@ h2 {
 
 .sns-icon:hover {
     transform: scale(1.2);
+}
+
+/* Naver Blog Logo Theme Toggle */
+.logo-dark {
+    display: none;
+}
+
+[data-theme="dark"] .logo-light {
+    display: none;
+}
+
+[data-theme="dark"] .logo-dark {
+    display: inline-block;
+}
+
+/* Bean Guide Section Styles */
+.bean-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.bean-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 1.5rem;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    transition: transform 0.3s ease;
+    display: flex;
+    flex-direction: column;
+}
+
+.bean-card:hover {
+    transform: translateY(-5px);
+}
+
+.bean-card.signature {
+    border: 2px solid var(--accent-color);
+    background: linear-gradient(to bottom right, var(--card-bg), #fdfaf7);
+}
+
+[data-theme="dark"] .bean-card.signature {
+    background: linear-gradient(to bottom right, var(--card-bg), #2b1f14);
+}
+
+.bean-header {
+    border-bottom: 2px solid var(--accent-color);
+    padding-bottom: 0.8rem;
+    margin-bottom: 1rem;
+}
+
+.bean-header h3 {
+    color: var(--primary-color);
+    font-size: 1.4rem;
+    margin-bottom: 0.3rem;
+}
+
+.bean-tag {
+    font-size: 0.85rem;
+    color: var(--secondary-color);
+    font-style: italic;
+}
+
+.bean-info {
+    margin-bottom: 1.5rem;
+    font-size: 0.95rem;
+}
+
+.bean-info p {
+    margin-bottom: 0.4rem;
+}
+
+.bean-stats {
+    margin-top: auto;
+}
+
+.stat-row {
+    display: flex;
+    align-items: center;
+    margin-bottom: 0.6rem;
+    font-size: 0.9rem;
+}
+
+.stat-row > span:first-child {
+    width: 60px;
+    font-weight: 700;
+}
+
+.stat-bar {
+    flex-grow: 1;
+    height: 8px;
+    background: #eee;
+    border-radius: 4px;
+    margin: 0 1rem;
+    overflow: hidden;
+}
+
+.stat-fill {
+    height: 100%;
+    background: var(--accent-color);
+    border-radius: 4px;
+}
+
+.stat-val {
+    width: 50px;
+    text-align: right;
+    font-weight: 700;
+    color: var(--secondary-color);
+}
+
+.roast-dots {
+    flex-grow: 1;
+    display: flex;
+    gap: 4px;
+    margin: 0 1rem;
+}
+
+.dot {
+    width: 10px;
+    height: 10px;
+    background: #eee;
+    border-radius: 50%;
+}
+
+.dot.filled {
+    background: #5c3c21;
+}
+
+[data-theme="dark"] .stat-bar, [data-theme="dark"] .dot {
+    background: #3c2a1e;
 }
 
 .footer p {

@@ -21,6 +21,7 @@
         <nav class="nav-links">
             <a href="#space">공간</a>
             <a href="#shop">원두 스토어</a>
+            <a href="#bean-guide">원두 가이드</a>
             <a href="#location">오시는 길</a>
         </nav>
         <div class="nav-utils">
@@ -91,15 +92,44 @@
 
         <!-- Commerce Section -->
         <section class="shop reveal" id="shop">
-            <h2>시그니처 로스팅 & 드립백</h2>
-            <p style="text-align: center; margin-bottom: 2rem; color: #666;">주례 브루어스가 직접 로스팅한 원두를 온라인 간편결제로 만나보세요.</p>
+            <h2>시그니처 로스팅 & 원두 스토어</h2>
+            <p style="text-align: center; margin-bottom: 2rem; color: #666;">주례 브루어스가 직접 로스팅한 신선한 원두를 온라인 간편결제로 만나보세요.</p>
             <div class="product-grid">
-                <!-- Product 1 -->
+                <!-- Signature Blend -->
                 <div class="product-card">
-                    <div class="product-img img-ethiopia"></div>
+                    <div class="product-img-wrapper">
+                        <div class="product-img img-signature"></div>
+                        <div class="img-content-overlay">
+                            <div class="overlay-title">주례 시그니처 블렌드</div>
+                            <div class="overlay-notes">다크초콜릿, 구운 아몬드, 카라멜</div>
+                        </div>
+                        <div class="img-logo-overlay">주례 브루어스</div>
+                    </div>
+                    <div class="product-info">
+                        <h3>주례 시그니처 블렌드</h3>
+                        <p class="desc">온두라스 50%, 콜롬비아 30%, 과테말라 20%의 완벽한 밸런스</p>
+                        <p class="price">14,000원 <span class="weight">(200g)</span></p>
+                        <select class="option-select">
+                            <option value="200">200g (기본)</option>
+                            <option value="500">500g (+11,000원)</option>
+                        </select>
+                        <button class="btn-secondary add-to-cart" data-id="p_sig" data-name="주례 시그니처 블렌드" data-price="14000">장바구니 담기</button>
+                    </div>
+                </div>
+
+                <!-- Ethiopia Yirgacheffe G1 -->
+                <div class="product-card">
+                    <div class="product-img-wrapper">
+                        <div class="product-img img-ethiopia"></div>
+                        <div class="img-content-overlay">
+                            <div class="overlay-title">에티오피아 예가체프 G1</div>
+                            <div class="overlay-notes">재스민, 상큼한 베리, 레몬</div>
+                        </div>
+                        <div class="img-logo-overlay">주례 브루어스</div>
+                    </div>
                     <div class="product-info">
                         <h3>에티오피아 예가체프 G1</h3>
-                        <p class="desc">꽃향기와 상큼한 베리류의 단맛, 기분 좋은 산미</p>
+                        <p class="desc">재스민 꽃향기와 레몬의 상큼함이 어우러진 화사한 맛</p>
                         <p class="price">15,000원 <span class="weight">(200g)</span></p>
                         <select class="option-select">
                             <option value="200">200g (기본)</option>
@@ -108,12 +138,20 @@
                         <button class="btn-secondary add-to-cart" data-id="p1" data-name="에티오피아 예가체프 G1" data-price="15000">장바구니 담기</button>
                     </div>
                 </div>
-                <!-- Product 2 -->
+
+                <!-- Guatemala Antigua SHB -->
                 <div class="product-card">
-                    <div class="product-img img-guatemala"></div>
+                    <div class="product-img-wrapper">
+                        <div class="product-img img-guatemala"></div>
+                        <div class="img-content-overlay">
+                            <div class="overlay-title">과테말라 안티구아 SHB</div>
+                            <div class="overlay-notes">스모키, 다크초콜릿, 견과류</div>
+                        </div>
+                        <div class="img-logo-overlay">주례 브루어스</div>
+                    </div>
                     <div class="product-info">
                         <h3>과테말라 안티구아 SHB</h3>
-                        <p class="desc">스모키한 향과 다크초콜릿의 부드러운 바디감</p>
+                        <p class="desc">화산 토양의 스모키한 향과 다크초콜릿의 묵직한 바디감</p>
                         <p class="price">14,000원 <span class="weight">(200g)</span></p>
                         <select class="option-select">
                             <option value="200">200g (기본)</option>
@@ -122,9 +160,138 @@
                         <button class="btn-secondary add-to-cart" data-id="p2" data-name="과테말라 안티구아 SHB" data-price="14000">장바구니 담기</button>
                     </div>
                 </div>
-                <!-- Product 3 -->
+
+                <!-- Tanzania AAA -->
                 <div class="product-card">
-                    <div class="product-img img-dripbag"></div>
+                    <div class="product-img-wrapper">
+                        <div class="product-img img-tanzania"></div>
+                        <div class="img-content-overlay">
+                            <div class="overlay-title">탄자니아 AAA</div>
+                            <div class="overlay-notes">자몽, 홍차, 달콤한 초콜릿</div>
+                        </div>
+                        <div class="img-logo-overlay">주례 브루어스</div>
+                    </div>
+                    <div class="product-info">
+                        <h3>탄자니아 AAA</h3>
+                        <p class="desc">자몽의 상큼한 산미와 홍차처럼 깔끔한 피니시</p>
+                        <p class="price">14,000원 <span class="weight">(200g)</span></p>
+                        <select class="option-select">
+                            <option value="200">200g (기본)</option>
+                            <option value="500">500g (+11,000원)</option>
+                        </select>
+                        <button class="btn-secondary add-to-cart" data-id="p_tanzania" data-name="탄자니아 AAA" data-price="14000">장바구니 담기</button>
+                    </div>
+                </div>
+
+                <!-- Kenya AA -->
+                <div class="product-card">
+                    <div class="product-img-wrapper">
+                        <div class="product-img img-kenya"></div>
+                        <div class="img-content-overlay">
+                            <div class="overlay-title">케냐 AA</div>
+                            <div class="overlay-notes">블랙커런트, 감귤, 와인</div>
+                        </div>
+                        <div class="img-logo-overlay">주례 브루어스</div>
+                    </div>
+                    <div class="product-info">
+                        <h3>케냐 AA</h3>
+                        <p class="desc">강렬한 산미와 블랙커런트의 깊고 풍부한 과일향</p>
+                        <p class="price">16,000원 <span class="weight">(200g)</span></p>
+                        <select class="option-select">
+                            <option value="200">200g (기본)</option>
+                            <option value="500">500g (+13,000원)</option>
+                        </select>
+                        <button class="btn-secondary add-to-cart" data-id="p_kenya" data-name="케냐 AA" data-price="16000">장바구니 담기</button>
+                    </div>
+                </div>
+
+                <!-- Kenya Peaberry -->
+                <div class="product-card">
+                    <div class="product-img-wrapper">
+                        <div class="product-img img-kenya-pb"></div>
+                        <div class="img-content-overlay">
+                            <div class="overlay-title">케냐 피베리</div>
+                            <div class="overlay-notes">꽃향기, 레몬, 농축된 단맛</div>
+                        </div>
+                        <div class="img-logo-overlay">주례 브루어스</div>
+                    </div>
+                    <div class="product-info">
+                        <h3>케냐 피베리</h3>
+                        <span class="bean-tag" style="font-size: 0.8rem; color: var(--accent-color); font-weight: bold;">[희귀 원두]</span>
+                        <p class="desc">작은 원형 원두에 농축된 화사한 꽃향기와 레몬의 산미</p>
+                        <p class="price">17,000원 <span class="weight">(200g)</span></p>
+                        <select class="option-select">
+                            <option value="200">200g (기본)</option>
+                            <option value="500">500g (+14,000원)</option>
+                        </select>
+                        <button class="btn-secondary add-to-cart" data-id="p_kenya_pb" data-name="케냐 피베리" data-price="17000">장바구니 담기</button>
+                    </div>
+                </div>
+
+                <!-- Colombia Supremo -->
+                <div class="product-card">
+                    <div class="product-img-wrapper">
+                        <div class="product-img img-colombia"></div>
+                        <div class="img-content-overlay">
+                            <div class="overlay-title">콜롬비아 수프리모</div>
+                            <div class="overlay-notes">카라멜, 견과류, 부드러운 밸런스</div>
+                        </div>
+                        <div class="img-logo-overlay">주례 브루어스</div>
+                    </div>
+                    <div class="product-info">
+                        <h3>콜롬비아 수프리모</h3>
+                        <p class="desc">호불호 없는 고소한 견과류와 카라멜의 부드러운 단맛</p>
+                        <p class="price">13,000원 <span class="weight">(200g)</span></p>
+                        <select class="option-select">
+                            <option value="200">200g (기본)</option>
+                            <option value="500">500g (+10,000원)</option>
+                        </select>
+                        <button class="btn-secondary add-to-cart" data-id="p_colombia" data-name="콜롬비아 수프리모" data-price="13000">장바구니 담기</button>
+                    </div>
+                </div>
+
+                <!-- Honduras SHG -->
+                <div class="product-card">
+                    <div class="product-img-wrapper">
+                        <div class="product-img img-honduras"></div>
+                        <div class="img-logo-overlay">주례 브루어스</div>
+                    </div>
+                    <div class="product-info">
+                        <h3>온두라스 SHG</h3>
+                        <p class="desc">초콜릿의 달콤함과 깨끗하고 부드러운 목넘김</p>
+                        <p class="price">13,000원 <span class="weight">(200g)</span></p>
+                        <select class="option-select">
+                            <option value="200">200g (기본)</option>
+                            <option value="500">500g (+10,000원)</option>
+                        </select>
+                        <button class="btn-secondary add-to-cart" data-id="p_honduras" data-name="온두라스 SHG" data-price="13000">장바구니 담기</button>
+                    </div>
+                </div>
+
+                <!-- Ethiopia Harrar -->
+                <div class="product-card">
+                    <div class="product-img-wrapper">
+                        <div class="product-img img-harrar"></div>
+                        <div class="img-logo-overlay">주례 브루어스</div>
+                    </div>
+                    <div class="product-info">
+                        <h3>에티오피아 하라르</h3>
+                        <p class="desc">베리류의 진한 풍미와 와인 같은 묵직한 바디감</p>
+                        <p class="price">15,000원 <span class="weight">(200g)</span></p>
+                        <select class="option-select">
+                            <option value="200">200g (기본)</option>
+                            <option value="500">500g (+12,000원)</option>
+                        </select>
+                        <button class="btn-secondary add-to-cart" data-id="p_harrar" data-name="에티오피아 하라르" data-price="15000">장바구니 담기</button>
+                    </div>
+                </div>
+
+                <!-- Dripbag Set (Existing) -->
+                <div class="product-card">
+                    <div class="product-img-wrapper">
+                        <div class="product-img img-dripbag"></div>
+                        <div class="img-logo-overlay">주례 브루어스</div>
+                    </div>
                     <div class="product-info">
                         <h3>시그니처 블렌드 드립백 세트</h3>
                         <p class="desc">언제 어디서나 간편하게 즐기는 주례 브루어스의 맛 (10개입)</p>
@@ -134,6 +301,194 @@
                             <option value="2">2상자 (+18,000원)</option>
                         </select>
                         <button class="btn-secondary add-to-cart" data-id="p3" data-name="드립백 세트" data-price="18000">장바구니 담기</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Bean Guide Section -->
+        <section class="bean-guide reveal" id="bean-guide">
+            <h2>주례 브루어스 원두 가이드</h2>
+            <p style="text-align: center; margin-bottom: 3rem; color: #666;">산지별 독특한 풍미와 특징을 가진 프리미엄 원두를 소개합니다.</p>
+            
+            <div class="bean-grid">
+                <!-- Signature Blend -->
+                <div class="bean-card signature">
+                    <div class="bean-header">
+                        <h3>주례 시그니처 블렌드</h3>
+                        <span class="bean-tag">매일 아침 즐기기 좋은 데일리 커피</span>
+                    </div>
+                    <div class="bean-info">
+                        <p><strong>블렌딩 비율:</strong> 온두라스(50%), 콜롬비아(30%), 과테말라(20%)</p>
+                        <p><strong>가공방식:</strong> Washed</p>
+                        <p><strong>커핑노트:</strong> 다크 초콜릿, 구운 견과류, 카라멜, 훌륭한 밸런스</p>
+                    </div>
+                    <div class="bean-stats">
+                        <div class="stat-row"><span>바디감</span><div class="stat-bar"><div class="stat-fill" style="width: 75%;"></div></div><span class="stat-val">6</span></div>
+                        <div class="stat-row"><span>신맛</span><div class="stat-bar"><div class="stat-fill" style="width: 50%;"></div></div><span class="stat-val">4</span></div>
+                        <div class="stat-row"><span>단맛</span><div class="stat-bar"><div class="stat-fill" style="width: 75%;"></div></div><span class="stat-val">6</span></div>
+                        <div class="stat-row"><span>쓴맛</span><div class="stat-bar"><div class="stat-fill" style="width: 37.5%;"></div></div><span class="stat-val">3</span></div>
+                        <div class="stat-row"><span>배전</span><div class="roast-dots"><span class="dot filled"></span><span class="dot filled"></span><span class="dot filled"></span><span class="dot filled"></span><span class="dot filled"></span><span class="dot filled"></span><span class="dot"></span><span class="dot"></span></div><span class="stat-val">풀시티</span></div>
+                    </div>
+                </div>
+
+                <!-- Tanzania AAA -->
+                <div class="bean-card">
+                    <div class="bean-header">
+                        <h3>탄자니아 AAA</h3>
+                        <span class="bean-tag">킬리만자로의 선물</span>
+                    </div>
+                    <div class="bean-info">
+                        <p><strong>생산지역:</strong> Kilimanjaro, Tanzania</p>
+                        <p><strong>가공방식:</strong> Washed</p>
+                        <p><strong>커핑노트:</strong> 자몽, 홍차, 초콜릿, 와이니</p>
+                    </div>
+                    <div class="bean-stats">
+                        <div class="stat-row"><span>바디감</span><div class="stat-bar"><div class="stat-fill" style="width: 62.5%;"></div></div><span class="stat-val">5</span></div>
+                        <div class="stat-row"><span>신맛</span><div class="stat-bar"><div class="stat-fill" style="width: 87.5%;"></div></div><span class="stat-val">7</span></div>
+                        <div class="stat-row"><span>단맛</span><div class="stat-bar"><div class="stat-fill" style="width: 62.5%;"></div></div><span class="stat-val">5</span></div>
+                        <div class="stat-row"><span>쓴맛</span><div class="stat-bar"><div class="stat-fill" style="width: 37.5%;"></div></div><span class="stat-val">3</span></div>
+                        <div class="stat-row"><span>배전</span><div class="roast-dots"><span class="dot filled"></span><span class="dot filled"></span><span class="dot filled"></span><span class="dot filled"></span><span class="dot filled"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span></div><span class="stat-val">시티</span></div>
+                    </div>
+                </div>
+
+                <!-- Kenya AA -->
+                <div class="bean-card">
+                    <div class="bean-header">
+                        <h3>케냐 AA</h3>
+                        <span class="bean-tag">최고급 아프리카 커피</span>
+                    </div>
+                    <div class="bean-info">
+                        <p><strong>생산지역:</strong> Nyeri/Kirinyaga, Kenya</p>
+                        <p><strong>가공방식:</strong> Washed</p>
+                        <p><strong>커핑노트:</strong> 블랙커런트, 감귤, 와인, 묵직함</p>
+                    </div>
+                    <div class="bean-stats">
+                        <div class="stat-row"><span>바디감</span><div class="stat-bar"><div class="stat-fill" style="width: 75%;"></div></div><span class="stat-val">6</span></div>
+                        <div class="stat-row"><span>신맛</span><div class="stat-bar"><div class="stat-fill" style="width: 100%;"></div></div><span class="stat-val">8</span></div>
+                        <div class="stat-row"><span>단맛</span><div class="stat-bar"><div class="stat-fill" style="width: 75%;"></div></div><span class="stat-val">6</span></div>
+                        <div class="stat-row"><span>쓴맛</span><div class="stat-bar"><div class="stat-fill" style="width: 25%;"></div></div><span class="stat-val">2</span></div>
+                        <div class="stat-row"><span>배전</span><div class="roast-dots"><span class="dot filled"></span><span class="dot filled"></span><span class="dot filled"></span><span class="dot filled"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span></div><span class="stat-val">하이</span></div>
+                    </div>
+                </div>
+
+                <!-- Kenya Peaberry -->
+                <div class="bean-card">
+                    <div class="bean-header">
+                        <h3>케냐 피베리</h3>
+                        <span class="bean-tag">농축된 풍미의 진수</span>
+                    </div>
+                    <div class="bean-info">
+                        <p><strong>생산지역:</strong> High Altitude, Kenya</p>
+                        <p><strong>가공방식:</strong> Washed</p>
+                        <p><strong>커핑노트:</strong> 꽃향기, 레몬, 농축된 단맛</p>
+                    </div>
+                    <div class="bean-stats">
+                        <div class="stat-row"><span>바디감</span><div class="stat-bar"><div class="stat-fill" style="width: 50%;"></div></div><span class="stat-val">4</span></div>
+                        <div class="stat-row"><span>신맛</span><div class="stat-bar"><div class="stat-fill" style="width: 87.5%;"></div></div><span class="stat-val">7</span></div>
+                        <div class="stat-row"><span>단맛</span><div class="stat-bar"><div class="stat-fill" style="width: 87.5%;"></div></div><span class="stat-val">7</span></div>
+                        <div class="stat-row"><span>쓴맛</span><div class="stat-bar"><div class="stat-fill" style="width: 25%;"></div></div><span class="stat-val">2</span></div>
+                        <div class="stat-row"><span>배전</span><div class="roast-dots"><span class="dot filled"></span><span class="dot filled"></span><span class="dot filled"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span></div><span class="stat-val">미디엄</span></div>
+                    </div>
+                </div>
+
+                <!-- Guatemala Antigua SHB -->
+                <div class="bean-card">
+                    <div class="bean-header">
+                        <h3>과테말라 안티구아 SHB</h3>
+                        <span class="bean-tag">스모키한 매력</span>
+                    </div>
+                    <div class="bean-info">
+                        <p><strong>생산지역:</strong> Antigua, Guatemala</p>
+                        <p><strong>가공방식:</strong> Washed</p>
+                        <p><strong>커핑노트:</strong> 스모키, 초콜릿, 스파이시, 견과류</p>
+                    </div>
+                    <div class="bean-stats">
+                        <div class="stat-row"><span>바디감</span><div class="stat-bar"><div class="stat-fill" style="width: 87.5%;"></div></div><span class="stat-val">7</span></div>
+                        <div class="stat-row"><span>신맛</span><div class="stat-bar"><div class="stat-fill" style="width: 50%;"></div></div><span class="stat-val">4</span></div>
+                        <div class="stat-row"><span>단맛</span><div class="stat-bar"><div class="stat-fill" style="width: 75%;"></div></div><span class="stat-val">6</span></div>
+                        <div class="stat-row"><span>쓴맛</span><div class="stat-bar"><div class="stat-fill" style="width: 50%;"></div></div><span class="stat-val">4</span></div>
+                        <div class="stat-row"><span>배전</span><div class="roast-dots"><span class="dot filled"></span><span class="dot filled"></span><span class="dot filled"></span><span class="dot filled"></span><span class="dot filled"></span><span class="dot filled"></span><span class="dot"></span><span class="dot"></span></div><span class="stat-val">풀시티</span></div>
+                    </div>
+                </div>
+
+                <!-- Colombia Supremo -->
+                <div class="bean-card">
+                    <div class="bean-header">
+                        <h3>콜롬비아 수프리모</h3>
+                        <span class="bean-tag">가장 완벽한 밸런스</span>
+                    </div>
+                    <div class="bean-info">
+                        <p><strong>생산지역:</strong> Huila/Antioquia, Colombia</p>
+                        <p><strong>가공방식:</strong> Washed</p>
+                        <p><strong>커핑노트:</strong> 카라멜, 견과류, 부드러움, 밸런스</p>
+                    </div>
+                    <div class="bean-stats">
+                        <div class="stat-row"><span>바디감</span><div class="stat-bar"><div class="stat-fill" style="width: 62.5%;"></div></div><span class="stat-val">5</span></div>
+                        <div class="stat-row"><span>신맛</span><div class="stat-bar"><div class="stat-fill" style="width: 62.5%;"></div></div><span class="stat-val">5</span></div>
+                        <div class="stat-row"><span>단맛</span><div class="stat-bar"><div class="stat-fill" style="width: 87.5%;"></div></div><span class="stat-val">7</span></div>
+                        <div class="stat-row"><span>쓴맛</span><div class="stat-bar"><div class="stat-fill" style="width: 37.5%;"></div></div><span class="stat-val">3</span></div>
+                        <div class="stat-row"><span>배전</span><div class="roast-dots"><span class="dot filled"></span><span class="dot filled"></span><span class="dot filled"></span><span class="dot filled"></span><span class="dot filled"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span></div><span class="stat-val">시티</span></div>
+                    </div>
+                </div>
+
+                <!-- Honduras SHG -->
+                <div class="bean-card">
+                    <div class="bean-header">
+                        <h3>온두라스 SHG</h3>
+                        <span class="bean-tag">깔끔하고 부드러운 단맛</span>
+                    </div>
+                    <div class="bean-info">
+                        <p><strong>생산지역:</strong> Marcala, Honduras</p>
+                        <p><strong>가공방식:</strong> Washed</p>
+                        <p><strong>커핑노트:</strong> 부드러운 단맛, 다크 초콜릿, 클린</p>
+                    </div>
+                    <div class="bean-stats">
+                        <div class="stat-row"><span>바디감</span><div class="stat-bar"><div class="stat-fill" style="width: 75%;"></div></div><span class="stat-val">6</span></div>
+                        <div class="stat-row"><span>신맛</span><div class="stat-bar"><div class="stat-fill" style="width: 50%;"></div></div><span class="stat-val">4</span></div>
+                        <div class="stat-row"><span>단맛</span><div class="stat-bar"><div class="stat-fill" style="width: 75%;"></div></div><span class="stat-val">6</span></div>
+                        <div class="stat-row"><span>쓴맛</span><div class="stat-bar"><div class="stat-fill" style="width: 37.5%;"></div></div><span class="stat-val">3</span></div>
+                        <div class="stat-row"><span>배전</span><div class="roast-dots"><span class="dot filled"></span><span class="dot filled"></span><span class="dot filled"></span><span class="dot filled"></span><span class="dot filled"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span></div><span class="stat-val">시티</span></div>
+                    </div>
+                </div>
+
+                <!-- Ethiopia Yirgacheffe G1 -->
+                <div class="bean-card">
+                    <div class="bean-header">
+                        <h3>에티오피아 예가체프 G1</h3>
+                        <span class="bean-tag">꽃향기가 가득한 산미</span>
+                    </div>
+                    <div class="bean-info">
+                        <p><strong>생산지역:</strong> Yirgacheffe, Ethiopia</p>
+                        <p><strong>가공방식:</strong> Washed</p>
+                        <p><strong>커핑노트:</strong> 재스민, 레몬, 베르가못, 산뜻함</p>
+                    </div>
+                    <div class="bean-stats">
+                        <div class="stat-row"><span>바디감</span><div class="stat-bar"><div class="stat-fill" style="width: 37.5%;"></div></div><span class="stat-val">3</span></div>
+                        <div class="stat-row"><span>신맛</span><div class="stat-bar"><div class="stat-fill" style="width: 100%;"></div></div><span class="stat-val">8</span></div>
+                        <div class="stat-row"><span>단맛</span><div class="stat-bar"><div class="stat-fill" style="width: 75%;"></div></div><span class="stat-val">6</span></div>
+                        <div class="stat-row"><span>쓴맛</span><div class="stat-bar"><div class="stat-fill" style="width: 12.5%;"></div></div><span class="stat-val">1</span></div>
+                        <div class="stat-row"><span>배전</span><div class="roast-dots"><span class="dot filled"></span><span class="dot filled"></span><span class="dot filled"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span></div><span class="stat-val">미디엄</span></div>
+                    </div>
+                </div>
+
+                <!-- Ethiopia Harrar -->
+                <div class="bean-card">
+                    <div class="bean-header">
+                        <h3>에티오피아 하라르</h3>
+                        <span class="bean-tag">와인 같은 묵직한 풍미</span>
+                    </div>
+                    <div class="bean-info">
+                        <p><strong>생산지역:</strong> Harrar, Ethiopia</p>
+                        <p><strong>가공방식:</strong> Natural</p>
+                        <p><strong>커핑노트:</strong> 건포도, 베리, 와인, 묵직한 바디</p>
+                    </div>
+                    <div class="bean-stats">
+                        <div class="stat-row"><span>바디감</span><div class="stat-bar"><div class="stat-fill" style="width: 87.5%;"></div></div><span class="stat-val">7</span></div>
+                        <div class="stat-row"><span>신맛</span><div class="stat-bar"><div class="stat-fill" style="width: 75%;"></div></div><span class="stat-val">6</span></div>
+                        <div class="stat-row"><span>단맛</span><div class="stat-bar"><div class="stat-fill" style="width: 87.5%;"></div></div><span class="stat-val">7</span></div>
+                        <div class="stat-row"><span>쓴맛</span><div class="stat-bar"><div class="stat-fill" style="width: 25%;"></div></div><span class="stat-val">2</span></div>
+                        <div class="stat-row"><span>배전</span><div class="roast-dots"><span class="dot filled"></span><span class="dot filled"></span><span class="dot filled"></span><span class="dot filled"></span><span class="dot filled"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span></div><span class="stat-val">시티</span></div>
                     </div>
                 </div>
             </div>
@@ -254,7 +609,8 @@
                 <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" alt="Instagram Logo">
             </a>
             <a href="https://blog.naver.com/shiho9135" target="_blank" rel="noopener noreferrer" class="sns-icon" aria-label="Naver Blog">
-                <img src="https://blog.kakaocdn.net/dn/CH9l9/btrF3R8R8zN/7z7J7zK2K7zK2K7zK2K7zK/img.png" alt="Naver Blog Logo">
+                <img src="naver_blog_light.png" alt="Naver Blog Logo" class="logo-light">
+                <img src="naver_blog_dark.png" alt="Naver Blog Logo" class="logo-dark">
             </a>
         </div>
         <p>상호명: 주례 브루어스 | 대표자: 김호준</p>

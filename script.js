@@ -105,7 +105,16 @@ document.addEventListener('DOMContentLoaded', () => {
             
             let finalPrice = basePrice;
             if (optionValue === '500') {
-                finalPrice += (id === 'p1' ? 12000 : 11000);
+                // Determine additional price based on the product ID or base price
+                if (id === 'p1') finalPrice += 12000;
+                else if (id === 'p2') finalPrice += 11000;
+                else if (id === 'p_sig') finalPrice += 11000;
+                else if (id === 'p_tanzania') finalPrice += 11000;
+                else if (id === 'p_kenya') finalPrice += 13000;
+                else if (id === 'p_kenya_pb') finalPrice += 14000;
+                else if (id === 'p_colombia') finalPrice += 10000;
+                else if (id === 'p_honduras') finalPrice += 10000;
+                else if (id === 'p_harrar') finalPrice += 12000;
             } else if (id === 'p3' && optionValue === '2') {
                 finalPrice += 18000;
             }
