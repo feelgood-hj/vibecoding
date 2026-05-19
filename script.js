@@ -139,16 +139,106 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // ------------------------------------
-    // Login Modal Logic
+    // Auth Logic (Supabase Auth)
     // ------------------------------------
+    const authContainer = document.getElementById('authContainer');
     const loginModal = document.getElementById('loginModal');
-    const loginBtn = document.getElementById('loginBtn');
     const closeLogin = document.getElementById('closeLogin');
+    const authTabs = document.querySelectorAll('.auth-tab');
+    const authTabContents = document.querySelectorAll('.auth-tab-content');
+    const loginForm = document.getElementById('loginForm');
+    const registerForm = document.getElementById('registerForm');
 
-    loginBtn.addEventListener('click', () => {
-        loginModal.classList.add('active');
+    // Update Header UI based on Auth State
+    function updateAuthUI(user) {
+        if (user) {
+            authContainer.innerHTML = `
+                <div class="user-info-container">
+                    <span class="user-email">안녕하세요, ${user.email.split('@')[0]}님</span>
+                    <button class="logout-btn" id="logoutBtn">로그아웃</button>
+                </div>
+            `;
+            document.getElementById('logoutBtn').addEventListener('click', handleLogout);
+        } else {
+            authContainer.innerHTML = `<button class="icon-btn" id="loginBtn">로그인</button>`;
+            document.getElementById('loginBtn').addEventListener('click', () => {
+                loginModal.classList.add('active');
+            });
+        }
+    }
+
+    // Handle Login
+    loginForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const email = document.getElementById('loginEmail').value;
+        const password = document.getElementById('loginPassword').value;
+
+        const { data, error } = await supabaseClient.auth.signInWithPassword({
+            email,
+            password,
+        });
+
+        if (error) {
+            alert('로그인 실패: ' + error.message);
+        } else {
+            alert('로그인 성공!');
+            loginModal.classList.remove('active');
+            loginForm.reset();
+        }
     });
 
+    // Handle Registration
+    registerForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const email = document.getElementById('registerEmail').value;
+        const password = document.getElementById('registerPassword').value;
+
+        const { data, error } = await supabaseClient.auth.signUp({
+            email,
+            password,
+        });
+
+        if (error) {
+            alert('회원가입 실패: ' + error.message);
+        } else {
+            alert('회원가입 성공! 이메일을 확인해주세요.');
+            // Some Supabase configs auto-login after signup, others require email confirm
+            if (data.user && data.session) {
+                loginModal.classList.remove('active');
+            }
+            registerForm.reset();
+        }
+    });
+
+    // Handle Logout
+    async function handleLogout() {
+        const { error } = await supabaseClient.auth.signOut();
+        if (error) {
+            alert('로그아웃 실패: ' + error.message);
+        } else {
+            alert('로그아웃 되었습니다.');
+        }
+    }
+
+    // Auth State Change Listener
+    supabaseClient.auth.onAuthStateChange((event, session) => {
+        updateAuthUI(session?.user ?? null);
+    });
+
+    // Modal Tab Switching
+    authTabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+            const target = tab.getAttribute('data-tab');
+            
+            authTabs.forEach(t => t.classList.remove('active'));
+            authTabContents.forEach(c => c.classList.remove('active'));
+            
+            tab.classList.add('active');
+            document.getElementById(`${target}Tab`).classList.add('active');
+        });
+    });
+
+    // Modal Close Logic
     closeLogin.addEventListener('click', () => {
         loginModal.classList.remove('active');
     });
@@ -159,13 +249,12 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    document.querySelectorAll('.social-btn').forEach(btn => {
-        btn.addEventListener('click', () => {
-            alert('소셜 로그인이 완료되었습니다.');
-            loginModal.classList.remove('active');
-            loginBtn.textContent = '마이페이지';
-        });
-    });
+    // Initial Auth Check
+    async function checkInitialAuth() {
+        const { data: { user } } = await supabaseClient.auth.getUser();
+        updateAuthUI(user);
+    }
+    checkInitialAuth();
 
     // ------------------------------------
     // Location Logic
