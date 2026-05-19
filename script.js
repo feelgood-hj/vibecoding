@@ -368,6 +368,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const reviewFormContainer = document.getElementById('reviewFormContainer');
     const stars = document.querySelectorAll('.star');
     const ratingValueInput = document.getElementById('ratingValue');
+    let allReviews = []; // Store all reviews for sorting and pagination
+    let currentSort = 'latest';
+    let currentPage = 1;
+    const reviewsPerPage = 5;
 
     // Star Rating Click Event
     stars.forEach(star => {
@@ -396,15 +400,43 @@ document.addEventListener('DOMContentLoaded', () => {
         const { data: { user } } = await supabaseClient.auth.getUser();
         const { data, error } = await supabaseClient
             .from('reviews')
-            .select('*')
-            .order('created_at', { ascending: false });
+            .select('*');
 
         if (error) {
             console.error('Error fetching reviews:', error);
             return;
         }
 
-        renderReviews(data, user);
+        allReviews = data;
+        updateReviewStats();
+        sortAndRenderReviews(user);
+    }
+
+    function updateReviewStats() {
+        const total = allReviews.length;
+        const avg = total > 0 
+            ? (allReviews.reduce((sum, r) => sum + r.rating, 0) / total).toFixed(1) 
+            : '0.0';
+        
+        document.getElementById('avgStars').textContent = `★ ${avg}`;
+        document.getElementById('totalReviewsCount').textContent = `(${total}개 리뷰)`;
+    }
+
+    function sortAndRenderReviews(currentUser) {
+        let sorted = [...allReviews];
+        
+        if (currentSort === 'latest') {
+            sorted.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
+        } else {
+            sorted.sort((a, b) => b.rating - a.rating);
+        }
+
+        // Pagination logic
+        const startIndex = (currentPage - 1) * reviewsPerPage;
+        const paginatedReviews = sorted.slice(startIndex, startIndex + reviewsPerPage);
+        
+        renderReviews(paginatedReviews, currentUser);
+        renderPagination(sorted.length);
     }
 
     function renderReviews(reviews, currentUser) {
@@ -426,11 +458,12 @@ document.addEventListener('DOMContentLoaded', () => {
                             <span class="review-date">${new Date(rev.created_at).toLocaleDateString()}</span>
                             ${isAuthor ? `
                                 <br>
-                                <button class="review-edit-btn" data-id="${rev.id}" data-content="${rev.content}" data-rating="${rev.rating}">수정</button>
+                                <button class="review-edit-btn" data-id="${rev.id}" data-content="${rev.content}" data-rating="${rev.rating}" data-image="${rev.image_url || ''}">수정</button>
                                 <button class="review-delete-btn" data-id="${rev.id}">삭제</button>
                             ` : ''}
                         </div>
                     </div>
+                    ${rev.image_url ? `<img src="${rev.image_url}" class="review-image" alt="Review Image">` : ''}
                     <div class="review-content">${rev.content}</div>
                 </div>
             `;
@@ -442,8 +475,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 const id = btn.getAttribute('data-id');
                 const content = btn.getAttribute('data-content');
                 const rating = parseInt(btn.getAttribute('data-rating'));
+                const imageUrl = btn.getAttribute('data-image');
                 
-                showInlineEditForm(id, content, rating);
+                showInlineEditForm(id, content, rating, imageUrl);
             });
         });
 
@@ -452,14 +486,17 @@ document.addEventListener('DOMContentLoaded', () => {
             btn.addEventListener('click', async () => {
                 const reviewId = btn.getAttribute('data-id');
                 if (confirm('정말 삭제하시겠어요?')) {
+                    console.log('Attempting to delete review ID:', reviewId);
                     const { error } = await supabaseClient
                         .from('reviews')
                         .delete()
                         .eq('id', reviewId);
 
                     if (error) {
+                        console.error('Delete Error:', error);
                         alert('리뷰 삭제 실패: ' + error.message);
                     } else {
+                        console.log('Delete successful');
                         alert('리뷰가 삭제되었습니다.');
                         fetchReviews();
                     }
@@ -468,15 +505,56 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    function showInlineEditForm(id, originalContent, originalRating) {
+    function renderPagination(totalCount) {
+        const totalPages = Math.ceil(totalCount / reviewsPerPage);
+        const paginationContainer = document.getElementById('reviewPagination');
+        paginationContainer.innerHTML = '';
+
+        if (totalPages <= 1) return;
+
+        for (let i = 1; i <= totalPages; i++) {
+            const pageBtn = document.createElement('button');
+            pageBtn.className = `page-btn ${i === currentPage ? 'active' : ''}`;
+            pageBtn.textContent = i;
+            pageBtn.addEventListener('click', async () => {
+                currentPage = i;
+                const { data: { user } } = await supabaseClient.auth.getUser();
+                sortAndRenderReviews(user);
+                document.getElementById('reviews').scrollIntoView({ behavior: 'smooth' });
+            });
+            paginationContainer.appendChild(pageBtn);
+        }
+    }
+
+    // Sort Button Event Listeners
+    document.querySelectorAll('.sort-btn').forEach(btn => {
+        btn.addEventListener('click', async () => {
+            document.querySelectorAll('.sort-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            currentSort = btn.getAttribute('data-sort');
+            currentPage = 1;
+            const { data: { user } } = await supabaseClient.auth.getUser();
+            sortAndRenderReviews(user);
+        });
+    });
+
+    function showInlineEditForm(id, originalContent, originalRating, originalImage) {
         const reviewItem = document.getElementById(`review-${id}`);
+        if (!reviewItem) {
+            console.error('Review item not found in DOM:', id);
+            return;
+        }
         const contentEl = reviewItem.querySelector('.review-content');
         const headerEl = reviewItem.querySelector('.review-item-header');
+        const imageEl = reviewItem.querySelector('.review-image');
 
         // Hide original content and header buttons
-        contentEl.style.display = 'none';
-        headerEl.querySelector('.review-edit-btn').style.display = 'none';
-        headerEl.querySelector('.review-delete-btn').style.display = 'none';
+        if (contentEl) contentEl.style.display = 'none';
+        if (imageEl) imageEl.style.display = 'none';
+        const editBtn = headerEl.querySelector('.review-edit-btn');
+        const deleteBtn = headerEl.querySelector('.review-delete-btn');
+        if (editBtn) editBtn.style.display = 'none';
+        if (deleteBtn) deleteBtn.style.display = 'none';
 
         // Create inline form
         const editForm = document.createElement('div');
@@ -485,6 +563,7 @@ document.addEventListener('DOMContentLoaded', () => {
             <div class="inline-edit-stars">
                 ${[1, 2, 3, 4, 5].map(v => `<span class="star ${v <= originalRating ? 'active' : ''}" data-value="${v}">★</span>`).join('')}
             </div>
+            <input type="url" class="inline-edit-image-url" placeholder="이미지 URL" value="${originalImage}">
             <textarea class="inline-edit-textarea">${originalContent}</textarea>
             <div class="inline-edit-buttons">
                 <button class="btn-inline-cancel">취소</button>
@@ -514,24 +593,29 @@ document.addEventListener('DOMContentLoaded', () => {
         // Cancel button logic
         editForm.querySelector('.btn-inline-cancel').addEventListener('click', () => {
             editForm.remove();
-            contentEl.style.display = 'block';
-            headerEl.querySelector('.review-edit-btn').style.display = 'inline-block';
-            headerEl.querySelector('.review-delete-btn').style.display = 'inline-block';
+            if (contentEl) contentEl.style.display = 'block';
+            if (imageEl) imageEl.style.display = 'block';
+            if (editBtn) editBtn.style.display = 'inline-block';
+            if (deleteBtn) deleteBtn.style.display = 'inline-block';
         });
 
         // Save button logic
         editForm.querySelector('.btn-inline-save').addEventListener('click', async () => {
             const newContent = editForm.querySelector('.inline-edit-textarea').value;
+            const newImage = editForm.querySelector('.inline-edit-image-url').value;
             
             if (confirm('수정 하시겠어요?')) {
+                console.log('Attempting to update review ID:', id, { content: newContent, rating: currentRating, image_url: newImage });
                 const { error } = await supabaseClient
                     .from('reviews')
-                    .update({ content: newContent, rating: currentRating })
+                    .update({ content: newContent, rating: currentRating, image_url: newImage })
                     .eq('id', id);
 
                 if (error) {
+                    console.error('Update Error:', error);
                     alert('리뷰 수정 실패: ' + error.message);
                 } else {
+                    console.log('Update successful');
                     alert('리뷰가 수정되었습니다!');
                     fetchReviews();
                 }
@@ -551,6 +635,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const content = document.getElementById('reviewContent').value;
         const rating = parseInt(ratingValueInput.value);
+        const imageUrl = document.getElementById('reviewImageUrl').value;
 
         // Insert new review
         const { error } = await supabaseClient
@@ -559,7 +644,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 { 
                     content, 
                     author_email: user.email, 
-                    rating 
+                    rating,
+                    image_url: imageUrl 
                 }
             ]);
 
