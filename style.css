@@ -1063,7 +1063,18 @@ h2 {
     }
     .logo { font-size: 1.2rem; }
     .icon-btn { padding: 0.4rem 0.6rem; font-size: 0.85rem; }
-    .nav-links { display: none; }
+    .nav-links { 
+        display: flex; 
+        width: 100%; 
+        overflow-x: auto;
+        white-space: nowrap;
+        padding-bottom: 0.5rem;
+        -webkit-overflow-scrolling: touch;
+        justify-content: flex-start;
+        gap: 1.2rem;
+    }
+    .nav-links::-webkit-scrollbar { display: none; }
+    .nav-links a { margin-left: 0; font-size: 0.95rem; }
     
     .hero { height: 50vh; padding: 1.5rem; }
     .hero-content h1 { font-size: 1.7rem; margin-bottom: 0.8rem; }
@@ -1095,6 +1106,10 @@ h2 {
     .product-info { padding: 1rem; }
     .product-info h3 { font-size: 1.2rem; }
     .price { font-size: 1.1rem; }
+
+    .cart-action-group { flex-wrap: wrap; justify-content: space-between; }
+    .cart-action-group .quantity-input { width: 30%; }
+    .cart-action-group .add-to-cart { width: 65%; font-size: 0.9rem; padding: 0.6rem; }
 
     .cart-drawer { width: 100%; right: -100%; }
     
@@ -1135,19 +1150,32 @@ h2 {
     .navbar { 
         padding: 0.6rem 3%; 
         flex-wrap: wrap;
-        justify-content: center;
+        justify-content: space-between;
         gap: 0.5rem;
     }
     .logo { 
         width: 100%; 
         text-align: center; 
         margin-bottom: 0.2rem;
-        font-size: 1.1rem;
+        font-size: 1.2rem;
+    }
+    .nav-links {
+        justify-content: center;
+        gap: 1rem;
     }
     .nav-utils {
         width: 100%;
         justify-content: space-around;
+        align-items: center;
+        margin-top: 0.5rem;
     }
+    .user-info-container {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 0.3rem;
+    }
+    .user-email { width: 100%; text-align: center; font-size: 0.85rem; }
+    .logout-btn { margin-right: 0 !important; font-size: 0.8rem; }
     .icon-btn {
         flex: 1;
         text-align: center;
