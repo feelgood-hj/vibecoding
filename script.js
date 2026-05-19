@@ -185,20 +185,21 @@ document.addEventListener('DOMContentLoaded', () => {
             
             const newOrder = {
                 id: 'ORD-' + Math.floor(Math.random() * 10000000),
-                userEmail: user.email,
+                user_email: user.email,
                 items: [...cart],
                 total: total,
-                timestamp: Date.now()
+                status: '결제완료'
             };
 
-            let orders = [];
-            try {
-                const saved = localStorage.getItem('orders');
-                if (saved) orders = JSON.parse(saved);
-            } catch(e) {}
-            
-            orders.push(newOrder);
-            localStorage.setItem('orders', JSON.stringify(orders));
+            const { error } = await supabaseClient
+                .from('orders')
+                .insert([newOrder]);
+
+            if (error) {
+                console.error('Order creation failed:', error);
+                alert('결제 처리 중 오류가 발생했습니다: ' + error.message);
+                return;
+            }
 
             cart = [];
             updateCartUI();

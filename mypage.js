@@ -44,20 +44,20 @@ document.addEventListener('DOMContentLoaded', async () => {
         window.location.href = 'index.html';
     });
 
-    // Load Orders
+    // Load Orders from Supabase
     const ordersContainer = document.getElementById('ordersContainer');
-    let allOrders = [];
-    try {
-        const savedOrders = localStorage.getItem('orders');
-        if (savedOrders) {
-            allOrders = JSON.parse(savedOrders);
-        }
-    } catch(e) {
-        console.error('Failed to parse orders:', e);
-    }
+    
+    const { data: userOrders, error } = await supabaseClient
+        .from('orders')
+        .select('*')
+        .eq('user_email', user.email)
+        .order('created_at', { ascending: false });
 
-    // Filter orders by current user
-    const userOrders = allOrders.filter(order => order.userEmail === user.email).sort((a, b) => b.timestamp - a.timestamp);
+    if (error) {
+        console.error('Failed to fetch orders:', error);
+        ordersContainer.innerHTML = '<div class="empty-orders">주문 내역을 불러오는데 실패했습니다.</div>';
+        return;
+    }
 
     if (userOrders.length === 0) {
         ordersContainer.innerHTML = `
@@ -69,11 +69,12 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
 
     ordersContainer.innerHTML = userOrders.map(order => {
-        const date = new Date(order.timestamp).toLocaleString();
+        const orderTime = new Date(order.created_at);
+        const date = orderTime.toLocaleString();
         
-        let statusBadge = '결제완료';
+        let statusBadge = order.status || '결제완료';
         // Mocking status changes based on time elapsed for demo purposes
-        const elapsedHours = (Date.now() - order.timestamp) / (1000 * 60 * 60);
+        const elapsedHours = (Date.now() - orderTime.getTime()) / (1000 * 60 * 60);
         if (elapsedHours > 48) statusBadge = '배송완료';
         else if (elapsedHours > 24) statusBadge = '배송중';
         else if (elapsedHours > 1) statusBadge = '상품준비중';
