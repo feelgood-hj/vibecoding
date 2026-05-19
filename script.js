@@ -166,12 +166,46 @@ document.addEventListener('DOMContentLoaded', () => {
         cartDrawer.classList.remove('active');
     });
 
-    document.getElementById('checkoutBtn').addEventListener('click', () => {
+    document.getElementById('checkoutBtn').addEventListener('click', async () => {
         if (cart.length === 0) {
             alert('장바구니가 비어 있습니다.');
             return;
         }
-        alert('결제 페이지로 이동합니다. (토스페이먼츠/카카오페이 연동 예정)');
+
+        const { data: { user } } = await supabaseClient.auth.getUser();
+        if (!user) {
+            alert('결제를 위해 로그인이 필요합니다.');
+            document.getElementById('loginModal').classList.add('active');
+            return;
+        }
+
+        if (confirm('선택하신 상품들을 결제하시겠습니까? (가상 결제)')) {
+            let total = 0;
+            cart.forEach(item => total += (item.price || 0) * (item.quantity || 1));
+            
+            const newOrder = {
+                id: 'ORD-' + Math.floor(Math.random() * 10000000),
+                userEmail: user.email,
+                items: [...cart],
+                total: total,
+                timestamp: Date.now()
+            };
+
+            let orders = [];
+            try {
+                const saved = localStorage.getItem('orders');
+                if (saved) orders = JSON.parse(saved);
+            } catch(e) {}
+            
+            orders.push(newOrder);
+            localStorage.setItem('orders', JSON.stringify(orders));
+
+            cart = [];
+            updateCartUI();
+            
+            alert('결제가 완료되었습니다! 구매관리 내역 페이지로 이동합니다.');
+            window.location.href = 'mypage.html';
+        }
     });
 
     // Initialize Cart UI on page load
@@ -194,6 +228,7 @@ document.addEventListener('DOMContentLoaded', () => {
             authContainer.innerHTML = `
                 <div class="user-info-container">
                     <span class="user-email">안녕하세요, ${user.email.split('@')[0]}님</span>
+                    <a href="mypage.html" class="logout-btn" style="margin-right: 10px;">마이페이지</a>
                     <button class="logout-btn" id="logoutBtn">로그아웃</button>
                 </div>
             `;

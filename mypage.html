@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>마이페이지 | 주례 브루어스</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <style>
+        .mypage-container {
+            max-width: 800px;
+            margin: 6rem auto 4rem;
+            padding: 0 1.5rem;
+            min-height: 60vh;
+        }
+        .mypage-header {
+            margin-bottom: 2rem;
+            border-bottom: 2px solid var(--accent-color);
+            padding-bottom: 1rem;
+        }
+        .order-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+        .order-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 1.5rem;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            border-bottom: 1px dashed var(--border-color);
+            padding-bottom: 1rem;
+        }
+        .order-status {
+            font-weight: bold;
+            color: var(--accent-color);
+            padding: 0.4rem 0.8rem;
+            background: rgba(189, 144, 108, 0.1);
+            border-radius: 20px;
+            font-size: 0.85rem;
+        }
+        .order-items {
+            list-style: none;
+            padding: 0;
+            margin: 0 0 1.5rem 0;
+        }
+        .order-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.8rem;
+            font-size: 0.95rem;
+            color: var(--text-color);
+        }
+        .order-item-name {
+            font-weight: bold;
+        }
+        .order-footer {
+            text-align: right;
+            font-size: 1.1rem;
+            font-weight: bold;
+            border-top: 1px solid var(--border-color);
+            padding-top: 1rem;
+        }
+        .empty-orders {
+            text-align: center;
+            padding: 4rem;
+            color: var(--text-muted);
+            background: var(--card-bg);
+            border-radius: 8px;
+            border: 1px dashed var(--border-color);
+        }
+        .home-btn {
+            display: inline-block;
+            margin-top: 1rem;
+            padding: 0.5rem 1.5rem;
+            background: var(--accent-color);
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <header class="navbar">
+        <a href="index.html" class="logo" style="text-decoration:none; color:inherit;">주례 브루어스</a>
+        <div class="nav-utils">
+            <div id="authContainer"></div>
+            <button class="icon-btn" id="themeToggle" aria-label="Toggle Dark Mode">🌙</button>
+        </div>
+    </header>
+
+    <main class="mypage-container">
+        <div class="mypage-header">
+            <h2>구매관리 내역</h2>
+            <p style="color: var(--text-muted); margin-top: 0.5rem;">결제하신 상품의 주문 및 배송 현황입니다.</p>
+        </div>
+
+        <div id="ordersContainer">
+            <!-- Orders will be injected here -->
+        </div>
+    </main>
+
+    <footer class="footer">
+        <p>상호명: 주례 브루어스 | 대표자: 김호준</p>
+        <p>주소: 부산광역시 사상구 주례로 123 | 고객센터: 051-123-4567</p>
+        <p>&copy; 2026 Jurye Brewers. All rights reserved.</p>
+    </footer>
+
+    <script src="mypage.js"></script>
+</body>
+</html>
