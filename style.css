@@ -429,6 +429,22 @@ h2 {
     color: var(--text-color);
 }
 
+.cart-action-group {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.quantity-input {
+    width: 70px;
+    padding: 0.6rem;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    background-color: var(--bg-muted);
+    color: var(--text-color);
+    font-family: inherit;
+    text-align: center;
+}
+
 .btn-secondary {
     width: 100%;
     background-color: var(--white);

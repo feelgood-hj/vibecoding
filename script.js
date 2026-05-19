@@ -73,12 +73,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 itemEl.innerHTML = `
                     <div class="cart-item-info">
                         <h4>${item.name}</h4>
-                        <p>${item.price.toLocaleString()}원 (${item.option}g)</p>
+                        <p>${item.price.toLocaleString()}원 (${item.option}g) &times; ${item.quantity}개</p>
                     </div>
                     <button class="remove-item" data-index="${index}">삭제</button>
                 `;
                 cartItemsList.appendChild(itemEl);
-                total += item.price;
+                total += item.price * item.quantity;
             });
         }
 
@@ -105,6 +105,8 @@ document.addEventListener('DOMContentLoaded', () => {
             const basePrice = parseInt(btn.getAttribute('data-price'));
             const optionSelect = btn.parentElement.querySelector('.option-select');
             const optionValue = optionSelect.value;
+            const quantityInput = btn.parentElement.querySelector('.quantity-input');
+            const quantity = quantityInput ? parseInt(quantityInput.value) : 1;
             
             let finalPrice = basePrice;
             if (optionValue === '500') {
@@ -122,12 +124,18 @@ document.addEventListener('DOMContentLoaded', () => {
                 finalPrice += 18000;
             }
 
-            cart.push({
-                id,
-                name,
-                price: finalPrice,
-                option: optionValue
-            });
+            const existingItem = cart.find(item => item.id === id && item.option === optionValue);
+            if (existingItem) {
+                existingItem.quantity += quantity;
+            } else {
+                cart.push({
+                    id,
+                    name,
+                    price: finalPrice,
+                    option: optionValue,
+                    quantity: quantity
+                });
+            }
 
             updateCartUI();
             cartDrawer.classList.add('active');
