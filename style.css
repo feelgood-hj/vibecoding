@@ -117,13 +117,14 @@ a {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 1rem 5%;
+    padding: clamp(0.6rem, 2vw, 1rem) clamp(4%, 5vw, 5%);
     background-color: var(--bg-color);
     border-bottom: 1px solid var(--border-color);
     position: sticky;
     top: 0;
     z-index: 100;
     backdrop-filter: blur(5px);
+    min-height: 4rem; /* keep height stable */
 }
 
 .logo {
@@ -143,7 +144,7 @@ a {
     color: var(--text-color);
     font-weight: 700;
     margin-left: 1.5rem;
-    font-size: 1rem;
+    font-size: clamp(0.85rem, 1.5vw, 1rem);
     transition: color 0.3s;
     white-space: nowrap;
 }
@@ -1160,28 +1161,29 @@ h2 {
 /* Responsive Adjustments */
 @media (max-width: 768px) {
     .navbar { 
-        padding: 0.8rem 4%; 
+        padding: clamp(0.5rem,2vw,0.8rem) clamp(2%,4vw,4%); 
     }
-    .logo { font-size: 1.2rem; }
-    .icon-btn { padding: 0.4rem 0.6rem; font-size: 0.85rem; }
+    .logo { font-size: clamp(1rem,2.5vw,1.2rem); }
+    .icon-btn { padding: clamp(0.3rem,1vw,0.4rem) clamp(0.5rem,1.2vw,0.6rem); font-size: clamp(0.75rem,1.5vw,0.85rem); }
     .nav-links { 
         display: flex; 
         width: 100%; 
         overflow-x: auto;
         white-space: nowrap;
-        padding-bottom: 0.5rem;
+        padding-bottom: clamp(0.3rem,0.8vw,0.5rem);
         -webkit-overflow-scrolling: touch;
         justify-content: flex-start;
-        gap: 0.8rem;
+        gap: clamp(0.4rem,0.8vw,0.8rem);
         scrollbar-width: none;
     }
     .nav-links::-webkit-scrollbar { display: none; }
-    .nav-links a { margin-left: 0; font-size: 0.9rem; }
-    
-    .hero { height: 50vh; padding: 1.5rem; }
-    .hero-content h1 { font-size: 1.7rem; margin-bottom: 0.8rem; }
-    .hero-content p { font-size: 0.9rem; margin-bottom: 1.5rem; }
-    .btn-primary { padding: 0.7rem 1.8rem; font-size: 0.95rem; }
+        .nav-links a {
+        margin-left: 0; font-size: clamp(0.75rem, 1.4vw, 0.9rem); }
+
+    .hero { height: clamp(40vh, 50vh, 60vh); padding: clamp(1rem, 2vw, 1.5rem); }
+    .hero-content h1 { font-size: clamp(1.5rem, 3vw, 1.7rem); margin-bottom: 0.8rem; }
+    .hero-content p { font-size: clamp(0.85rem, 2vw, 0.9rem); margin-bottom: 1.5rem; }
+    .btn-primary { padding: clamp(0.5rem,1.5vw,0.7rem) clamp(1.5rem,2vw,1.8rem); font-size: clamp(0.85rem,1.8vw,0.95rem); }
 
     section { padding: 3rem 1rem; }
     h2 { font-size: 1.5rem; margin-bottom: 1.8rem; }
