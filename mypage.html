@@ -23,6 +23,42 @@
             border-bottom: 2px solid var(--accent-color);
             padding-bottom: 1rem;
         }
+
+        /* Tab Navigation */
+        .mypage-tabs {
+            display: flex;
+            gap: 0;
+            margin-bottom: 2rem;
+            border-bottom: 2px solid var(--border-color);
+        }
+        .mypage-tab {
+            padding: 0.8rem 1.5rem;
+            border: none;
+            background: none;
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--text-muted);
+            border-bottom: 3px solid transparent;
+            transition: color 0.3s, border-color 0.3s;
+            margin-bottom: -2px;
+        }
+        .mypage-tab:hover {
+            color: var(--text-color);
+        }
+        .mypage-tab.active {
+            color: var(--primary-color);
+            border-bottom-color: var(--accent-color);
+        }
+        .tab-content {
+            display: none;
+        }
+        .tab-content.active {
+            display: block;
+        }
+
+        /* Order Styles */
         .order-card {
             background: var(--card-bg);
             border: 1px solid var(--border-color);
@@ -90,11 +126,161 @@
             font-weight: bold;
         }
 
-        /* 반응형 가시성 조절 */
+        /* Profile Edit Styles */
+        .profile-section {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+        .profile-section h3 {
+            font-size: 1.15rem;
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.8rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+        .profile-field {
+            margin-bottom: 1.2rem;
+        }
+        .profile-field label {
+            display: block;
+            font-weight: 700;
+            font-size: 0.9rem;
+            margin-bottom: 0.4rem;
+            color: var(--text-color);
+        }
+        .profile-field input {
+            width: 100%;
+            padding: 0.8rem 1rem;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            font-family: inherit;
+            font-size: 1rem;
+            background: var(--bg-muted);
+            color: var(--text-color);
+            transition: border-color 0.3s;
+        }
+        .profile-field input:focus {
+            border-color: var(--accent-color);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(189, 144, 108, 0.15);
+        }
+        .profile-field input:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+        .profile-email-display {
+            padding: 0.8rem 1rem;
+            background: var(--bg-muted);
+            border-radius: 8px;
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            border: 1px solid var(--border-color);
+        }
+        .profile-save-btn {
+            display: inline-block;
+            background: var(--accent-color);
+            color: white;
+            border: none;
+            padding: 0.8rem 2rem;
+            border-radius: 8px;
+            font-family: inherit;
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: background 0.3s, transform 0.2s;
+            margin-top: 0.5rem;
+        }
+        .profile-save-btn:hover {
+            background: var(--secondary-color);
+            transform: translateY(-2px);
+        }
+        .profile-save-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+        .save-msg {
+            display: inline-block;
+            margin-left: 1rem;
+            font-size: 0.9rem;
+            color: #27ae60;
+            font-weight: 700;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        .save-msg.show {
+            opacity: 1;
+        }
+
+        /* Account Deletion Section */
+        .danger-section {
+            background: var(--card-bg);
+            border: 1px solid #e74c3c;
+            border-radius: 12px;
+            padding: 2rem;
+            margin-top: 2rem;
+        }
+        .danger-section h3 {
+            color: #e74c3c;
+            font-size: 1.15rem;
+            margin-bottom: 1rem;
+        }
+        .danger-section p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+        .danger-section ul {
+            list-style: none;
+            padding: 0;
+            margin-bottom: 1.5rem;
+        }
+        .danger-section ul li {
+            padding: 0.4rem 0;
+            font-size: 0.88rem;
+            color: var(--text-muted);
+        }
+        .danger-section ul li::before {
+            content: "⚠️ ";
+        }
+        .delete-account-btn {
+            background: #e74c3c;
+            color: white;
+            border: none;
+            padding: 0.8rem 2rem;
+            border-radius: 8px;
+            font-family: inherit;
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: background 0.3s, transform 0.2s;
+        }
+        .delete-account-btn:hover {
+            background: #c0392b;
+            transform: translateY(-2px);
+        }
+
+        /* Responsive */
         @media (max-width: 600px) {
             .mypage-container {
                 margin: 5rem auto 2rem;
                 padding: 0 1rem;
+            }
+            .mypage-tabs {
+                overflow-x: auto;
+                white-space: nowrap;
+                -webkit-overflow-scrolling: touch;
+                scrollbar-width: none;
+            }
+            .mypage-tabs::-webkit-scrollbar { display: none; }
+            .mypage-tab {
+                padding: 0.6rem 1rem;
+                font-size: 0.9rem;
             }
             .order-header {
                 flex-direction: column;
@@ -112,6 +298,9 @@
                 text-align: left;
                 font-size: 1.05rem;
             }
+            .profile-section, .danger-section {
+                padding: 1.2rem;
+            }
         }
     </style>
 </head>
@@ -126,12 +315,77 @@
 
     <main class="mypage-container">
         <div class="mypage-header">
-            <h2>구매관리 내역</h2>
-            <p style="color: var(--text-muted); margin-top: 0.5rem;">결제하신 상품의 주문 및 배송 현황입니다.</p>
+            <h2>마이페이지</h2>
+            <p style="color: var(--text-muted); margin-top: 0.5rem;" id="welcomeMsg">로딩 중...</p>
         </div>
 
-        <div id="ordersContainer">
-            <!-- Orders will be injected here -->
+        <!-- Tab Navigation -->
+        <div class="mypage-tabs" role="tablist">
+            <button class="mypage-tab active" data-tab="orders" role="tab">주문 내역</button>
+            <button class="mypage-tab" data-tab="profile" role="tab">회원 정보</button>
+            <button class="mypage-tab" data-tab="account" role="tab">계정 관리</button>
+        </div>
+
+        <!-- Tab 1: Orders -->
+        <div class="tab-content active" id="tab-orders">
+            <div id="ordersContainer">
+                <!-- Orders will be injected here -->
+            </div>
+        </div>
+
+        <!-- Tab 2: Profile -->
+        <div class="tab-content" id="tab-profile">
+            <div class="profile-section">
+                <h3>📧 기본 정보</h3>
+                <div class="profile-field">
+                    <label>이메일 (변경 불가)</label>
+                    <div class="profile-email-display" id="profileEmail">-</div>
+                </div>
+            </div>
+
+            <div class="profile-section">
+                <h3>📋 배송 정보</h3>
+                <div class="profile-field">
+                    <label for="profilePhone">연락처</label>
+                    <input type="tel" id="profilePhone" placeholder="010-0000-0000">
+                </div>
+                <div class="profile-field">
+                    <label for="profileZip">우편번호</label>
+                    <input type="text" id="profileZip" placeholder="우편번호">
+                </div>
+                <div class="profile-field">
+                    <label for="profileAddress">주소</label>
+                    <input type="text" id="profileAddress" placeholder="기본 주소">
+                </div>
+                <div class="profile-field">
+                    <label for="profileAddressDetail">상세 주소</label>
+                    <input type="text" id="profileAddressDetail" placeholder="상세 주소 (동/호수)">
+                </div>
+                <button class="profile-save-btn" id="profileSaveBtn">저장하기</button>
+                <span class="save-msg" id="saveMsg">✅ 저장되었습니다!</span>
+            </div>
+        </div>
+
+        <!-- Tab 3: Account Management -->
+        <div class="tab-content" id="tab-account">
+            <div class="profile-section">
+                <h3>🔒 비밀번호 변경</h3>
+                <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1rem;">비밀번호 변경 이메일을 발송합니다.</p>
+                <button class="profile-save-btn" id="resetPasswordBtn">비밀번호 변경 이메일 발송</button>
+                <span class="save-msg" id="pwMsg"></span>
+            </div>
+
+            <div class="danger-section">
+                <h3>⚠️ 회원 탈퇴</h3>
+                <p>회원 탈퇴 시 아래 사항을 반드시 확인해 주세요.</p>
+                <ul>
+                    <li>탈퇴 즉시 모든 개인정보가 삭제됩니다.</li>
+                    <li>등록된 리뷰는 자동으로 삭제되지 않습니다.</li>
+                    <li>진행 중인 주문이 있는 경우 처리 완료 후 탈퇴해 주세요.</li>
+                    <li>탈퇴 후에는 동일한 이메일로 재가입이 가능합니다.</li>
+                </ul>
+                <button class="delete-account-btn" id="deleteAccountBtn">회원 탈퇴하기</button>
+            </div>
         </div>
     </main>
 
