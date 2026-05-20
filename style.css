@@ -142,13 +142,23 @@ a {
     text-decoration: none;
     color: var(--text-color);
     font-weight: 700;
-    margin-left: 2rem;
+    margin-left: 1.5rem;
     font-size: 1rem;
     transition: color 0.3s;
+    white-space: nowrap;
 }
 
 .nav-links a:hover {
     color: var(--accent-color);
+}
+
+/* Keyboard accessibility - focus ring */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible {
+    outline: 2px solid var(--accent-color);
+    outline-offset: 2px;
 }
 
 .nav-utils {
@@ -1102,10 +1112,11 @@ h2 {
         padding-bottom: 0.5rem;
         -webkit-overflow-scrolling: touch;
         justify-content: flex-start;
-        gap: 1.2rem;
+        gap: 0.8rem;
+        scrollbar-width: none;
     }
     .nav-links::-webkit-scrollbar { display: none; }
-    .nav-links a { margin-left: 0; font-size: 0.95rem; }
+    .nav-links a { margin-left: 0; font-size: 0.9rem; }
     
     .hero { height: 50vh; padding: 1.5rem; }
     .hero-content h1 { font-size: 1.7rem; margin-bottom: 0.8rem; }
