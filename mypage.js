@@ -134,6 +134,32 @@ document.addEventListener('DOMContentLoaded', async () => {
     document.getElementById('profileAddress').value = meta.address || '';
     document.getElementById('profileAddressDetail').value = meta.address_detail || '';
 
+    // ------------------------------------
+    // Kakao Postcode Address Search
+    // ------------------------------------
+    document.getElementById('addrSearchBtn').addEventListener('click', () => {
+        new daum.Postcode({
+            oncomplete: function(data) {
+                // 도로명 주소 우선, 없으면 지번 주소 사용
+                const fullAddress = data.roadAddress || data.jibunAddress;
+                document.getElementById('profileZip').value = data.zonecode;
+                document.getElementById('profileAddress').value = fullAddress;
+                document.getElementById('profileAddressDetail').focus();
+            },
+            theme: {
+                bgColor: '#5c3c21',
+                searchBgColor: '#bd906c',
+                contentBgColor: '#ffffff',
+                pageBgColor: '#fafafa',
+                textColor: '#333',
+                queryTextColor: '#ffffff',
+                postcodeTextColor: '#bd906c',
+                emphTextColor: '#5c3c21',
+                outlineColor: '#d1bfae'
+            }
+        }).open();
+    });
+
     document.getElementById('profileSaveBtn').addEventListener('click', async () => {
         const saveBtn = document.getElementById('profileSaveBtn');
         const saveMsg = document.getElementById('saveMsg');

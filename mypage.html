@@ -11,6 +11,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
     <style>
         .mypage-container {
             max-width: 800px;
@@ -124,6 +125,33 @@
             text-decoration: none;
             border-radius: 4px;
             font-weight: bold;
+        }
+
+        /* Address Search Row */
+        .address-search-row {
+            display: flex;
+            gap: 0.6rem;
+            align-items: center;
+        }
+        .address-search-row input {
+            flex: 1;
+        }
+        .addr-search-btn {
+            flex-shrink: 0;
+            padding: 0.8rem 1rem;
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-family: inherit;
+            font-size: 0.9rem;
+            font-weight: 700;
+            cursor: pointer;
+            white-space: nowrap;
+            transition: background 0.3s;
+        }
+        .addr-search-btn:hover {
+            background: var(--secondary-color);
         }
 
         /* Profile Edit Styles */
@@ -351,11 +379,14 @@
                 </div>
                 <div class="profile-field">
                     <label for="profileZip">우편번호</label>
-                    <input type="text" id="profileZip" placeholder="우편번호">
+                    <div class="address-search-row">
+                        <input type="text" id="profileZip" placeholder="우편번호" readonly>
+                        <button type="button" class="addr-search-btn" id="addrSearchBtn">포랑 주소검색</button>
+                    </div>
                 </div>
                 <div class="profile-field">
                     <label for="profileAddress">주소</label>
-                    <input type="text" id="profileAddress" placeholder="기본 주소">
+                    <input type="text" id="profileAddress" placeholder="기본 주소" readonly>
                 </div>
                 <div class="profile-field">
                     <label for="profileAddressDetail">상세 주소</label>
