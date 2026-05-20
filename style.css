@@ -1111,7 +1111,7 @@ h2 {
     .cart-action-group .quantity-input { width: 30%; }
     .cart-action-group .add-to-cart { width: 65%; font-size: 0.9rem; padding: 0.6rem; }
 
-    .cart-drawer { width: 100%; right: -100%; }
+    .cart-drawer { width: 85%; right: -100%; box-shadow: -5px 0 20px rgba(0,0,0,0.4); }
     
     /* Map Responsive Hack */
     .map-container {

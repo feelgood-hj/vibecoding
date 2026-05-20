@@ -428,7 +428,8 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     }, {
-        threshold: 0.15 // 15% of the element is visible
+        threshold: 0.02, // Changed to 2% to ensure very tall elements like the shop reveal on small screens
+        rootMargin: '0px 0px -50px 0px' // Triggers slightly before it fully comes into view
     });
 
     revealElements.forEach(el => {
