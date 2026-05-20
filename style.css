@@ -1497,3 +1497,71 @@ h2 {
     text-decoration: underline;
 }
 
+/* External Links SEO Section */
+.ext-links-section {
+    background: var(--card-bg);
+    border-radius: 16px;
+    padding: 4rem 5%;
+    margin: 4rem auto;
+    box-shadow: 0 8px 30px rgba(92, 60, 33, 0.06);
+}
+
+.ext-links-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1.5rem;
+    margin-top: 1rem;
+}
+
+.ext-link-card {
+    display: flex;
+    align-items: flex-start;
+    gap: 1.2rem;
+    padding: 1.4rem;
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    text-decoration: none;
+    color: var(--text-color);
+    background: var(--bg-color);
+    transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+}
+
+.ext-link-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(92, 60, 33, 0.12);
+    border-color: var(--accent-color);
+}
+
+.ext-link-icon {
+    font-size: 2rem;
+    flex-shrink: 0;
+    line-height: 1;
+}
+
+.ext-link-body strong {
+    display: block;
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    margin-bottom: 0.4rem;
+}
+
+.ext-link-body p {
+    font-size: 0.88rem;
+    color: var(--text-muted);
+    line-height: 1.5;
+    margin-bottom: 0.6rem;
+}
+
+.ext-link-url {
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--accent-color);
+    letter-spacing: 0.02em;
+}
+
+@media (max-width: 768px) {
+    .ext-links-section { padding: 2.5rem 1.25rem; margin: 2rem auto; }
+    .ext-links-grid { grid-template-columns: 1fr; gap: 1rem; }
+}
+
