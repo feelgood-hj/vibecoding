@@ -613,7 +613,22 @@
                 <div id="reviewFormContainer" class="review-form-box">
                     <p class="auth-needed-msg">로그인 후 리뷰를 작성할 수 있습니다.</p>
                     <form id="reviewForm" class="review-form" style="display: none;">
+                        <div class="form-group">
+                            <label for="reviewBean" style="font-weight:700; margin-bottom:0.5rem; display:block;">구매 원두 선택</label>
+                            <select id="reviewBean" class="review-bean-select" required>
+                                <option value="" disabled selected>리뷰할 원두를 선택해주세요</option>
+                                <option value="주례 시그니처 블렌드">주례 시그니처 블렌드</option>
+                                <option value="탄자니아 AAA">탄자니아 AAA</option>
+                                <option value="케냐 AA">케냐 AA</option>
+                                <option value="과테말라 안티구아 SHB">과테말라 안티구아 SHB</option>
+                                <option value="콜롬비아 수프리모">콜롬비아 수프리모</option>
+                                <option value="온두라스 SHG">온두라스 SHG</option>
+                                <option value="에티오피아 예가체프">에티오피아 예가체프</option>
+                                <option value="에티오피아 하라르">에티오피아 하라르</option>
+                            </select>
+                        </div>
                         <div class="star-rating">
+                            <span class="star-label">별점</span>
                             <span class="star" data-value="1">★</span>
                             <span class="star" data-value="2">★</span>
                             <span class="star" data-value="3">★</span>

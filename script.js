@@ -539,6 +539,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     <div class="review-item-header">
                         <div>
                             <span class="review-author">${rev.author_email.split('@')[0]}***</span>
+                            ${rev.bean_name ? `<span class="review-bean-badge">☕ ${rev.bean_name}</span>` : ''}
                             <div class="review-stars">${'★'.repeat(rev.rating)}${'☆'.repeat(5 - rev.rating)}</div>
                         </div>
                         <div style="text-align: right;">
@@ -723,6 +724,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const content = document.getElementById('reviewContent').value;
         const rating = parseInt(ratingValueInput.value);
         const imageUrl = document.getElementById('reviewImageUrl').value;
+        const beanName = document.getElementById('reviewBean').value;
 
         // Insert new review
         const { error } = await supabaseClient
@@ -732,7 +734,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     content, 
                     author_email: user.email, 
                     rating,
-                    image_url: imageUrl 
+                    image_url: imageUrl,
+                    bean_name: beanName
                 }
             ]);
 
@@ -741,6 +744,7 @@ document.addEventListener('DOMContentLoaded', () => {
         } else {
             alert('리뷰가 등록되었습니다!');
             reviewForm.reset();
+            document.getElementById('reviewBean').selectedIndex = 0;
             updateStarUI(5);
             fetchReviews();
         }
